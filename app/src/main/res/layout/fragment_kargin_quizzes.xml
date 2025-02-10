@@ -16,7 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Username -->
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
@@ -29,7 +28,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Profile Picture -->
         <ImageView
             android:id="@+id/profile_picture"
             android:layout_width="48dp"
@@ -47,21 +45,21 @@
 
     <!-- Title Section -->
     <TextView
-        android:id="@+id/quizzes_title"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quizzes"
+        android:text="Kargin"
         android:textSize="24sp"
         android:textColor="#000"
         android:fontFamily="sans-serif-medium"
         app:layout_constraintTop_toBottomOf="@id/top_section"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginTop="16dp" />
+        android:layout_marginTop="16dp"/>
 
-    <!-- First Quiz Card -->
+    <!-- Kargin multer Quiz Card -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/kargin_card"
+        android:id="@+id/kargin_multer_quiz"
         android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -69,7 +67,7 @@
         android:layout_marginTop="16dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/quizzes_title"
+        app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -78,42 +76,42 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/kargin_card_image"
+                android:id="@+id/kargin_multer_image"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/first_image"
+                android:src="@drawable/kargin_multer_image"
                 android:layout_alignParentStart="true"
-                android:contentDescription="@string/kargin_card_image" />
+                android:contentDescription="@string/kargin_multer_image" />
 
             <TextView
-                android:id="@+id/kargin_text_card"
+                android:id="@+id/kargin_multer_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kargin "
+                android:text="Kargin multer"
                 android:textSize="18sp"
                 android:textColor="@android:color/holo_red_dark"
                 android:fontFamily="sans-serif-medium"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
-                android:layout_toEndOf="@id/kargin_card_image" />
+                android:layout_toEndOf="@id/kargin_multer_image" />
 
             <Button
-                android:id="@+id/kargin_card_button"
+                android:id="@+id/kargin_multer_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="Choose"
+                android:text="Start"
                 android:textColor="#FFF"
                 android:backgroundTint="#FF5252"
-                android:layout_marginEnd="8dp"
-                />
+                android:layout_marginEnd="8dp"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Kargin serial Quiz Card -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/vitamin_card"
+        android:id="@+id/kargin_serial_quiz"
         android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -121,7 +119,7 @@
         android:layout_marginTop="16dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/kargin_card"
+        app:layout_constraintTop_toBottomOf="@id/kargin_multer_quiz"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -130,36 +128,91 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/vitamin_card_image"
+                android:id="@+id/kargin_serial_image"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/vitamin_image"
+                android:src="@drawable/kargin_serial_image"
                 android:layout_alignParentStart="true"
-                android:contentDescription="@string/vitamin_card_image" />
+                android:contentDescription="@string/kargin_serial_image" />
 
             <TextView
-                android:id="@+id/vitamin_card_text"
+                android:id="@+id/kargin_serial_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vitamin club"
+                android:text="Kargin serial"
                 android:textSize="18sp"
-                android:textColor="@android:color/holo_blue_dark"
+                android:textColor="@android:color/holo_red_dark"
                 android:fontFamily="sans-serif-medium"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
-                android:layout_toEndOf="@id/vitamin_card_image" />
+                android:layout_toEndOf="@id/kargin_serial_image" />
 
             <Button
-                android:id="@+id/vitamin_card_button"
+                android:id="@+id/kargin_serial_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="start"
-                android:layout_marginEnd="8dp"
+                android:text="Start"
                 android:textColor="#FFF"
-                android:backgroundTint="#3F51B5" />
+                android:backgroundTint="#FF5252"
+                android:layout_marginEnd="8dp"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+    <!-- Kargin haxordum Quiz Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/kargin_haxordum_quiz"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintTop_toBottomOf="@id/kargin_serial_quiz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/kargin_haxordum_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/kargin_haxordum_image"
+                android:layout_alignParentStart="true"
+                android:contentDescription="@string/kargin_haxordum_image" />
+
+            <TextView
+                android:id="@+id/kargin_haxordum_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kargin haxordum"
+                android:textSize="18sp"
+                android:textColor="@android:color/holo_red_dark"
+                android:fontFamily="sans-serif-medium"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/kargin_haxordum_image" />
+
+            <Button
+                android:id="@+id/kargin_haxordum_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="Start"
+                android:textColor="#FFF"
+                android:backgroundTint="#FF5252"
+                android:layout_marginEnd="8dp"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
