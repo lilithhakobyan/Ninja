@@ -34,7 +34,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/profile_picture"
+            android:src="@drawable/baseline_logout_24"
             android:contentDescription="Profile Picture"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
@@ -80,9 +80,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/kargin_multer_image"
-                android:layout_alignParentStart="true"
-                android:contentDescription="@string/kargin_multer_image" />
+                android:src="@drawable/baseline_logout_24"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/kargin_multer_title"
@@ -132,9 +131,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/kargin_serial_image"
-                android:layout_alignParentStart="true"
-                android:contentDescription="@string/kargin_serial_image" />
+                android:src="@drawable/baseline_logout_24"
+                android:layout_alignParentStart="true"/>
 
             <TextView
                 android:id="@+id/kargin_serial_title"
@@ -184,9 +182,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/kargin_haxordum_image"
-                android:layout_alignParentStart="true"
-                android:contentDescription="@string/kargin_haxordum_image" />
+                android:src="@drawable/baseline_logout_24"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/kargin_haxordum_title"

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 public class Kargin_quizzes extends Fragment {
 
     public Kargin_quizzes() {
-        // Required empty public constructor
+        
     }
 
     @Nullable

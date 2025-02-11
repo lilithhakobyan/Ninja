@@ -36,7 +36,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/profile_picture"
+            android:src="@drawable/baseline_logout_24"
             android:contentDescription="Profile Picture"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/top_section"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginTop="16dp" />
+        android:layout_marginTop="16dp" />
 
     <!-- First Quiz Card -->
     <androidx.cardview.widget.CardView
@@ -82,15 +82,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/first_image"
-                android:layout_alignParentStart="true"
-                android:contentDescription="@string/kargin_card_image" />
+                android:src="@drawable/baseline_logout_24"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/kargin_text_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kargin "
+                android:text="Kargin"
                 android:textSize="18sp"
                 android:textColor="@android:color/holo_red_dark"
                 android:fontFamily="sans-serif-medium"
@@ -107,11 +106,11 @@
                 android:text="Choose"
                 android:textColor="#FFF"
                 android:backgroundTint="#FF5252"
-                android:layout_marginEnd="8dp"
-                />
+                android:layout_marginEnd="8dp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Second Quiz Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/vitamin_card"
         android:layout_width="0dp"
@@ -134,15 +133,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/vitamin_image"
-                android:layout_alignParentStart="true"
-                android:contentDescription="@string/vitamin_card_image" />
+                android:src="@drawable/baseline_logout_24"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/vitamin_card_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vitamin club"
+                android:text="Vitamin Club"
                 android:textSize="18sp"
                 android:textColor="@android:color/holo_blue_dark"
                 android:fontFamily="sans-serif-medium"
@@ -156,10 +154,22 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="start"
+                android:text="Start"
                 android:layout_marginEnd="8dp"
                 android:textColor="#FFF"
                 android:backgroundTint="#3F51B5" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#FFF5EB"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
