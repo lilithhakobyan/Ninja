@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="newPass" type="id" />
+    <item name="showNewPass" type="id" />
+    <item name="confNewPass" type="id" />
+    <item name="showNewConfPass" type="id" />
+</resources>
