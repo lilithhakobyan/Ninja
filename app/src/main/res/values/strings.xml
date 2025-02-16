@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Ninja</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="register_now_text">Don&apos;t have an account? <font color='#4A5DF3'><b>Register Now</b></font></string>
-    <string name="login_now_text">Already have an account? <font color='#4A5DF3'><b>Login Now</b></font></string>
-    <string name="rebebmer_pass_text">Remember password? <font color='#4A5DF3'><b>Login Now</b></font></string>
-
+    <string name="register_now_text"><![CDATA[Don\'t have an account?Register Now]]></string>
+    <string name="login_now_text">Already have an account? Login Now</string>
+    <string name="remember_pass_text">Remember password? Login Now</string>
 </resources>
+
