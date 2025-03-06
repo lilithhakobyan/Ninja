@@ -1,13 +1,10 @@
 package com.example.ninja;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -19,8 +16,17 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                startActivity(intent);
+                SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+                boolean isFirstTime = sharedPreferences.getBoolean("FirstTime", true);
+
+                if (isFirstTime) {
+                    // Show Welcome Slider if first time
+                    startActivity(new Intent(SplashScreenActivity.this, WelcomeActivity.class));
+                } else {
+                    // Go directly to MainActivity
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                }
+
                 finish();
             }
         }, 3000);

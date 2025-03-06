@@ -4,5 +4,10 @@
     <string name="register_now_text"><![CDATA[Don\'t have an account?Register Now]]></string>
     <string name="login_now_text">Already have an account? Login Now</string>
     <string name="remember_pass_text">Remember password? Login Now</string>
+    <string name="screen1">Բարի գալուստ Նինջա!</string>
+    <string name="screen2">Արի տեսնենք՝ կկարողանաս պատասխանել</string>
+    <string name="screen1desc">Խաղացեք ընկերների հետ, պատասխանեք հարցերին ու նվաճեք առաջատարների գագաթը:</string>
+    <string name="screen2desc">Հայկական հումոր, լեգենդար տեսարաններ ու մեմեր՝ մեկ վայրում: </string>
+    <string name="startDesc">Create a long video or shorts and upload on youtube. Interact with your subscribers on youtube live.</string>
 </resources>
 
