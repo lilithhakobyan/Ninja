@@ -19,7 +19,6 @@
         android:id="@+id/whiteBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/rounded_white_bg"
         app:layout_constraintTop_toBottomOf="@id/sliderImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="@string/screen1"
             android:gravity="center"
-            android:textSize="28sp"
+            android:textSize="25sp"
             android:textStyle="bold"/>
 
         <TextView

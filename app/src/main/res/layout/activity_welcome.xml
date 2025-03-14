@@ -6,8 +6,26 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
     tools:context=".WelcomeActivity">
+
+    <!-- Top half of the screen (White) -->
+    <View
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomView" />
+
+    <!-- Bottom half of the screen (Beige) -->
+    <View
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_bottom"
+        app:layout_constraintTop_toBottomOf="@id/topView"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 
     <!-- Skip Button -->
     <Button
@@ -23,15 +41,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- ViewPager for Slides -->
+    <!-- ViewPager2 for Slides -->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/slideViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:contentDescription="Swipe through the slides"
         app:layout_constraintTop_toBottomOf="@id/skipButton"
         app:layout_constraintBottom_toTopOf="@id/dotIndicator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
     <!-- Back Button -->
     <Button
@@ -51,23 +71,25 @@
         android:id="@+id/nextButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:backgroundTint="@color/blue"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/btn_circle"
-        android:drawableTop="@drawable/baseline_navigate_next_24"
-        android:padding="10dp"
+        android:drawableEnd="@drawable/baseline_navigate_next_24"
         android:gravity="center"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="15dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Dot Indicator for Slider -->
+    <!-- Dot Indicator -->
     <LinearLayout
         android:id="@+id/dotIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

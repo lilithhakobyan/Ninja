@@ -14,7 +14,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     private final Context context;
     private final int[] sliderAllImages = {
             R.drawable.adzik,
-            R.drawable.start
+            R.drawable.vardan
     };
 
     private final int[] sliderAllTitle = {
