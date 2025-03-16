@@ -48,7 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
         textUsername = findViewById(R.id.textUsername);
@@ -62,6 +61,12 @@ public class RegisterActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.LogNow);
         ImageView showPass1 = findViewById(R.id.showPass1);
         ImageView showPass2 = findViewById(R.id.showPass2);
+
+
+        forgotPass.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, ForgotPassActivity.class);
+            startActivity(intent);
+        });
 
         showPass1.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
@@ -111,7 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnGoogle.setOnClickListener(v -> signInWithGoogle());
 
-        forgotPass.setOnClickListener(v -> resetPassword());
     }
 
     private void setupGoogleSignIn() {
@@ -123,23 +127,6 @@ public class RegisterActivity extends AppCompatActivity {
                         .setFilterByAuthorizedAccounts(false)
                         .build())
                 .build();
-    }
-
-    private void resetPassword() {
-        String email = textEmail.getText().toString();
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "Enter a valid email to reset password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(this, "Password reset email sent", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.e(TAG, "Password reset failed: " + task.getException().getMessage());
-                        Toast.makeText(this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
 
     private void registerUser() {

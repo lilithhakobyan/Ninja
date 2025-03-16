@@ -61,6 +61,11 @@ public class LoginActivity extends AppCompatActivity {
 
         ImageView showPass = findViewById(R.id.showPass);
 
+        forgotPass.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPassActivity.class);
+            startActivity(intent);
+        });
+
         showPass.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
@@ -102,14 +107,6 @@ public class LoginActivity extends AppCompatActivity {
             signInWithGoogle();
         });
 
-        forgotPass.setOnClickListener(v -> {
-            String emailText = email.getText().toString();
-            if (emailText.isEmpty()) {
-                Toast.makeText(LoginActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
-            } else {
-                sendPasswordResetEmail(emailText);
-            }
-        });
     }
 
     private void loginUser(String email, String password) {
@@ -159,17 +156,6 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     } else {
                         Toast.makeText(LoginActivity.this, "Google Authentication Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void sendPasswordResetEmail(String email) {
-        mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(LoginActivity.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Error sending reset email", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
