@@ -12,6 +12,7 @@ firebaseAuth = "23.2.0"
 credentials = "1.5.0-rc01"
 playServicesAuth = "20.7.0"   # ✅ Fixed: Corrected Google Play Services Auth dependency
 googleid = "1.1.1"
+firebaseFirestore = "25.1.2"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -23,7 +24,8 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
-play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }  # ✅ Corrected
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }  # ✅ Corrected
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
