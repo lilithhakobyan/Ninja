@@ -8,6 +8,9 @@
     <string name="screen2">Արի տեսնենք՝ կկարողանաս պատասխանել</string>
     <string name="screen1desc">Խաղացեք ընկերների հետ, պատասխանեք հարցերին ու նվաճեք առաջատարների գագաթը:</string>
     <string name="screen2desc">Հայկական հումոր, լեգենդար տեսարաններ ու մեմեր՝ մեկ վայրում: </string>
+    <string name="startDesc">Create a long video or shorts and upload on youtube. Interact with your subscribers on youtube live.</string>
+    <string name="default_web_client_id">530152070036-iqcni1knrtf917t9pj34b9fsapq6h172.apps.googleusercontent.com</string>
+    <string name="if_open_email" />
 
 </resources>
 

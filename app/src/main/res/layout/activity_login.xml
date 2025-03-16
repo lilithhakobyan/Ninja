@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/rootLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -153,12 +154,12 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Google login -->
-    <Button
+    <ImageView
         android:id="@+id/btnGoogle"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/bg_google"
+        android:src="@drawable/ic_google"
         android:contentDescription="Google Login"
         app:layout_constraintTop_toBottomOf="@id/orLogin"
         app:layout_constraintStart_toStartOf="parent"

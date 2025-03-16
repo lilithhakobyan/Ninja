@@ -56,7 +56,7 @@ public class WelcomeActivity extends AppCompatActivity {
         boolean isFirstTime = prefs.getBoolean("firstTime", true);
 
         if (!isFirstTime) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
 
@@ -101,7 +101,7 @@ public class WelcomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences("Onboarding", MODE_PRIVATE).edit();
         editor.putBoolean("firstTime", false);
         editor.apply();
-        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
         finish();
     }
 

@@ -57,10 +57,10 @@
         app:layout_constraintTop_toBottomOf="@id/textForgPass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/sendMail" />
+        app:layout_constraintBottom_toTopOf="@id/enterMail" />
 
     <EditText
-        android:id="@+id/sendMail"
+        android:id="@+id/enterMail"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginBottom="20dp"
@@ -85,13 +85,13 @@
         android:backgroundTint="#4A5DF3"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/sendMail"
+        app:layout_constraintTop_toBottomOf="@id/enterMail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Login now -->
     <TextView
-        android:id="@+id/regNow"
+        android:id="@+id/rememberLoginNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"

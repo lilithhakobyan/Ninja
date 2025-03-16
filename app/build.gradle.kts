@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -30,14 +31,17 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
-
 dependencies {
+    implementation(libs.firebase.auth)  // Firebase Authentication
+    implementation(libs.play.services.auth) // Google Sign-In SDK
 
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
+

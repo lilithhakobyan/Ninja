@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "530152070036",
+    "project_id": "kargin",
+    "storage_bucket": "kargin.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530152070036:android:a029865a4cfbe5c1034d81",
+        "android_client_info": {
+          "package_name": "com.example.ninja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530152070036-iqcni1knrtf917t9pj34b9fsapq6h172.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0y2SSoD2cwXY6h3ZhTJbN5gJE-IVj4WQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530152070036-iqcni1knrtf917t9pj34b9fsapq6h172.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
