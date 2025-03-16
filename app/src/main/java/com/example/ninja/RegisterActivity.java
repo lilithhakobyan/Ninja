@@ -5,9 +5,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -57,7 +60,35 @@ public class RegisterActivity extends AppCompatActivity {
         TextView forgotPass = findViewById(R.id.forgotPass);
         ImageView backBtn = findViewById(R.id.backBtn);
         TextView textView = findViewById(R.id.LogNow);
+        ImageView showPass1 = findViewById(R.id.showPass1);
+        ImageView showPass2 = findViewById(R.id.showPass2);
 
+        showPass1.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    textPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    textPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    return true;
+            }
+            return false;
+        });
+
+
+        showPass2.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    confirmPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    confirmPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    return true;
+            }
+            return false;
+        });
 
         String fullText = "Already have an account? Login Now";
         SpannableString spannable = new SpannableString(fullText);

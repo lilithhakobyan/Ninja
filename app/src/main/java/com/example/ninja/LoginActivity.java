@@ -5,8 +5,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))  // Replace with your client ID from Firebase console
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -52,9 +55,24 @@ public class LoginActivity extends AppCompatActivity {
         EditText email = findViewById(R.id.textEmail);
         EditText pass = findViewById(R.id.textPass);
         Button login = findViewById(R.id.btnLogin);
-        ImageView googleLogin = findViewById(R.id.btnGoogle);  // Use ImageView for Google Login
+        ImageView googleLogin = findViewById(R.id.btnGoogle);
         TextView forgotPass = findViewById(R.id.forgotPass);
         TextView textView = findViewById(R.id.regNow);
+
+        ImageView showPass = findViewById(R.id.showPass);
+
+        showPass.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    return true;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    return true;
+            }
+            return false;
+        });
 
         String fullText = "Don't have an account? Register Now";
         SpannableString spannable = new SpannableString(fullText);
