@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".WelcomeActivity">
 
-    <!-- Top half of the screen (White) -->
+
     <View
         android:id="@+id/topView"
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomView" />
 
-    <!-- Bottom half of the screen (Beige) -->
+
     <View
         android:id="@+id/bottomView"
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Skip"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="15dp"
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -71,15 +71,19 @@
         android:id="@+id/nextButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:backgroundTint="@color/blue"
+        android:background="@drawable/btn_circle"
+        android:drawableStart="@null"
+        android:drawableTop="@drawable/baseline_navigate_next_24"
+        android:gravity="center"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="28dp"
-        android:background="@drawable/btn_circle"
-        android:drawableEnd="@drawable/baseline_navigate_next_24"
-        android:gravity="center"
-        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+
 
     <!-- Dot Indicator -->
     <LinearLayout
