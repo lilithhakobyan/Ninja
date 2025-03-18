@@ -58,13 +58,11 @@ public class RegisterActivity extends AppCompatActivity {
         confirmPass = findViewById(R.id.confrimPass);
         Button btnRegister = findViewById(R.id.btnRegister);
         ImageView btnGoogle = findViewById(R.id.btnGoogle);
-        TextView forgotPass = findViewById(R.id.forgotPass);
         ImageView backBtn = findViewById(R.id.backBtn);
         TextView textView = findViewById(R.id.LogNow);
         ImageView showPass1 = findViewById(R.id.showPass1);
         ImageView showPass2 = findViewById(R.id.showPass2);
 
-        forgotPass.setOnClickListener(v -> startActivity(new Intent(this, ForgotPassActivity.class)));
         backBtn.setOnClickListener(v -> finish());
         btnRegister.setOnClickListener(v -> registerUser());
         setupGoogleSignIn();
@@ -168,7 +166,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     .addOnCompleteListener(emailTask -> {
                                         if (emailTask.isSuccessful()) {
                                             Toast.makeText(this, "Registration successful. Verify your email!", Toast.LENGTH_LONG).show();
-                                            // Optionally, log the user out until they verify their email
                                             mAuth.signOut();
                                             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                             finish();

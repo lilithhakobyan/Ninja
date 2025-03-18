@@ -11,8 +11,10 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class ForgotPassActivity extends AppCompatActivity {
     private EditText email;
     private Button send;
     private TextView textView;
+    private ImageView backBtn;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -37,6 +40,16 @@ public class ForgotPassActivity extends AppCompatActivity {
         send = findViewById(R.id.btnSend);
         mAuth = FirebaseAuth.getInstance();
         textView = findViewById(R.id.rememberLoginNow);
+        backBtn = findViewById(R.id.backBtn);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ForgotPassActivity.this, LoginActivity.class);
+                startActivity(intent);
+                }
+        });
+
 
         String fullText = "Remember password? Login Now";
         SpannableString spannable = new SpannableString(fullText);

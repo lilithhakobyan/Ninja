@@ -139,18 +139,6 @@
         app:layout_constraintBottom_toBottomOf="@id/textPass"
         app:layout_constraintVertical_bias="0.5"/>
 
-    <!-- Forgot  -->
-    <TextView
-        android:id="@+id/forgotPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Forgot Password?"
-        android:textSize="14sp"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/confrimPass"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- register btn -->
     <Button
@@ -162,14 +150,14 @@
         android:backgroundTint="#4A5DF3"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/forgotPass"
+        app:layout_constraintTop_toBottomOf="@id/confrimPass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- gic -->
     <View
         android:layout_width="0dp"
-        android:layout_height="3dp"
+        android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="#BDBDBD"
         app:layout_constraintTop_toBottomOf="@id/btnRegister"
@@ -191,7 +179,7 @@
 
     <View
         android:layout_width="0dp"
-        android:layout_height="3dp"
+        android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="#BDBDBD"
         app:layout_constraintTop_toBottomOf="@id/btnRegister"
