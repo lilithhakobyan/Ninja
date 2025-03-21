@@ -1,20 +1,19 @@
 package com.example.ninja;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private TextView usernameTextView;
-
+    private BottomNavigationView bottomNavigationView;
 
     @SuppressLint({"ResourceType", "MissingInflatedId"})
     @Override
@@ -36,24 +35,37 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         usernameTextView = findViewById(R.id.username);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         loadUserData();
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.top_section), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
+        // Buttons inside Home Screen
         karginButton = findViewById(R.id.kargin_card_button);
         vitaminButton = findViewById(R.id.vitamin_card_button);
 
-        karginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFragment(new Kargin_quizzes());
+        karginButton.setOnClickListener(v -> openFragment(new Kargin_quizzes()));
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.nav_home) {
+                showHome();
+                return true;
+            } else if (itemId == R.id.nav_discover) {
+                selectedFragment = new DiscoverFragment();
+            } else if (itemId == R.id.nav_leaderboard) {
+                selectedFragment = new LeaderboardFragment();
+            } else if (itemId == R.id.nav_settings) {
+                selectedFragment = new SettingsFragment();
             }
+
+            if (selectedFragment != null) {
+                openFragment(selectedFragment);
+            }
+            return true;
         });
+
     }
 
     private void loadUserData() {
@@ -81,19 +93,24 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.quizzes_title).setVisibility(View.GONE);
         findViewById(R.id.kargin_card).setVisibility(View.GONE);
         findViewById(R.id.vitamin_card).setVisibility(View.GONE);
-
         findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
+    }
+
+    private void showHome() {
+        findViewById(R.id.top_section).setVisibility(View.VISIBLE);
+        findViewById(R.id.quizzes_title).setVisibility(View.VISIBLE);
+        findViewById(R.id.kargin_card).setVisibility(View.VISIBLE);
+        findViewById(R.id.vitamin_card).setVisibility(View.VISIBLE);
+        findViewById(R.id.fragment_container).setVisibility(View.GONE);
+
+        getSupportFragmentManager().popBackStack(null, getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
     }
 
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
-            findViewById(R.id.top_section).setVisibility(View.VISIBLE);
-            findViewById(R.id.quizzes_title).setVisibility(View.VISIBLE);
-            findViewById(R.id.kargin_card).setVisibility(View.VISIBLE);
-            findViewById(R.id.vitamin_card).setVisibility(View.VISIBLE);
-            findViewById(R.id.fragment_container).setVisibility(View.GONE);
+            showHome();
         } else {
             super.onBackPressed();
         }

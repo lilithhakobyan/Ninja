@@ -7,7 +7,18 @@
     android:layout_height="match_parent"
     android:background="#FFF5EB">
 
-    <!-- Top Section: Username and Profile Picture -->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bottom_nav_background"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <!-- Title Section -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top_section"
         android:layout_width="0dp"
@@ -17,12 +28,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+
         <!-- Username -->
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="username"
+            android:layout_marginTop="35dp"
             android:textSize="20sp"
             android:textColor="#000"
             android:fontFamily="sans-serif-medium"
@@ -36,6 +49,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/baseline_person_24"
             android:scaleType="centerCrop"
@@ -43,9 +57,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/circle_background" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Title Section -->
     <TextView
         android:id="@+id/quizzes_title"
         android:layout_width="wrap_content"
