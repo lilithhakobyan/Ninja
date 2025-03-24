@@ -1,6 +1,7 @@
 package com.example.ninja;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Kargin_quizzes extends Fragment {
 
     private TextView usernameTextView;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+
 
     public Kargin_quizzes() {
 
@@ -24,13 +32,25 @@ public class Kargin_quizzes extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_kargin_quizzes, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         usernameTextView = view.findViewById(R.id.username);
 
-        if (getArguments() != null) {
-            String username = getArguments().getString("username", "Guest");
-            usernameTextView.setText(username);
-        }
-
         return view;
+    }
+    private void loadUserData() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            db.collection("users").document(user.getUid())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String username = documentSnapshot.getString("username");
+                            usernameTextView.setText(username);
+                        }
+                    })
+                    .addOnFailureListener(e -> Log.e("MainActivity", "Failed to load user data: " + e.getMessage()));
+        }
     }
 }

@@ -31,10 +31,8 @@ public class WelcomeActivity extends AppCompatActivity {
         public void onPageSelected(int position) {
             setDotIndicator(position);
 
-            // Show back button only after the first page
             backButton.setVisibility(position > 0 ? View.VISIBLE : View.INVISIBLE);
 
-            // Change Next button text dynamically
             if (position == totalSlides - 1) {
                 nextButton.setText("Finish");
             } else {

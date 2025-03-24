@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         loadUserData();
 
-        // Buttons inside Home Screen
         karginButton = findViewById(R.id.kargin_card_button);
         vitaminButton = findViewById(R.id.vitamin_card_button);
 
