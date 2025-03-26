@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Score Circle -->
+    <RelativeLayout
+        android:id="@+id/score_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="16dp">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorSize="150dp"
+            android:indeterminate="false"
+            android:progress="75"
+            app:trackThickness="18dp"
+            android:progressTint="#9C27B0"
+            android:layout_centerInParent="true" />
+
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="198"
+            android:textSize="32sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <!-- Score Details -->
+    <RelativeLayout
+        android:id="@+id/score_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/score_section"
+        android:background="@drawable/rounded_card"
+        android:padding="16dp"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/tv_completion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100% Իմ պրոգրեսը"
+            android:textSize="16sp"
+            android:textColor="@color/purple"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:id="@+id/tv_total_questions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="27 Ընդհանուր"
+            android:textSize="16sp"
+            android:textColor="@color/blue"
+            android:layout_below="@id/tv_completion" />
+
+        <TextView
+            android:id="@+id/tv_correct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11 Ճիշտ"
+            android:textSize="16sp"
+            android:textColor="@color/orange"
+            android:layout_below="@id/tv_total_questions" />
+
+        <TextView
+            android:id="@+id/tv_wrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="19 Սխալ"
+            android:textSize="16sp"
+            android:textColor="@color/green"
+            android:layout_below="@id/tv_correct" />
+    </RelativeLayout>
+
+    <!-- Action Buttons -->
+    <RelativeLayout
+        android:id="@+id/action_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/score_details"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btn_play_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   Կրկնել   "
+            android:drawableTop="@drawable/ic_replay"
+            android:background="@drawable/bg_button_ripple"
+            android:layout_alignParentStart="true" />
+
+
+        <Button
+            android:id="@+id/btn_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Գլխավոր"
+            android:drawableTop="@drawable/baseline_home_24"
+            android:background="@drawable/bg_button_ripple"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/btn_leaderboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Աղյուսակ"
+            android:drawableTop="@drawable/baseline_leaderboard_24"
+            android:background="@drawable/bg_button_ripple"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</RelativeLayout>
