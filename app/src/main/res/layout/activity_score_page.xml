@@ -2,9 +2,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bg"
     android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center"
+    tools:context=".ScorePage">
+
 
     <!-- Score Circle -->
     <RelativeLayout
@@ -27,7 +30,7 @@
 
 
         <TextView
-            android:id="@+id/tv_score"
+            android:id="@+id/scoreText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -48,7 +51,7 @@
         android:layout_marginTop="16dp">
 
         <TextView
-            android:id="@+id/tv_completion"
+            android:id="@+id/completion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100% Իմ պրոգրեսը"
@@ -57,31 +60,31 @@
             android:layout_alignParentTop="true" />
 
         <TextView
-            android:id="@+id/tv_total_questions"
+            android:id="@+id/total_questions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="27 Ընդհանուր"
             android:textSize="16sp"
             android:textColor="@color/blue"
-            android:layout_below="@id/tv_completion" />
+            android:layout_below="@id/completion" />
 
         <TextView
-            android:id="@+id/tv_correct"
+            android:id="@+id/correct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="11 Ճիշտ"
             android:textSize="16sp"
-            android:textColor="@color/orange"
-            android:layout_below="@id/tv_total_questions" />
+            android:textColor="@color/green"
+            android:layout_below="@id/total_questions" />
 
         <TextView
-            android:id="@+id/tv_wrong"
+            android:id="@+id/wrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="19 Սխալ"
             android:textSize="16sp"
-            android:textColor="@color/green"
-            android:layout_below="@id/tv_correct" />
+            android:textColor="@color/orange"
+            android:layout_below="@id/correct" />
     </RelativeLayout>
 
     <!-- Action Buttons -->
