@@ -22,7 +22,7 @@
         />
 
     <!-- Progress Indicator -->
-    <View
+    <ProgressBar
         android:id="@+id/progressBar1"
         android:layout_width="50dp"
         android:layout_height="4dp"
@@ -42,6 +42,19 @@
         android:layout_marginHorizontal="20dp"
         />
 
+    <!-- Question Text -->
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your question will appear here"
+        android:textSize="18sp"
+        android:textColor="#191326"
+        android:layout_below="@id/progressBar2"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="20dp"
+        />
+
     <!-- Quiz Card -->
     <RelativeLayout
         android:id="@+id/quizCard"
@@ -50,10 +63,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_edittext"
         android:padding="15dp"
-        android:layout_below="@id/progressBar2"
-        android:layout_marginTop="50dp">
+        android:layout_below="@id/questionText"
+        android:layout_marginTop="24dp">
 
-
+        <!-- WebView for Video -->
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
@@ -61,7 +74,6 @@
             android:layout_marginTop="16dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
-
 
         <!-- Answer Options -->
         <Button
@@ -109,5 +121,4 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="20dp"
         />
-
 </RelativeLayout>
