@@ -12,51 +12,51 @@
     <string name="default_web_client_id">530152070036-iqcni1knrtf917t9pj34b9fsapq6h172.apps.googleusercontent.com</string>
     <string name="if_open_email" />
 
-<!--    new pass page-->
+    <!--    new pass page-->
     <string name="create_new_pass_text">Ստեղծեք նոր գաղտնաբառ</string>
     <string name="caption_createpass">Նոր գաղտնաբառը պետք է տարբերվի նախկինում օգտագործածներից</string>
     <string name="new_pass">Նոր գաղտնաբառ</string>
     <string name="confrim_new_pass">Հաստատել գաղտնաբառը</string>
     <string name="reset_pass">Վերականգնել</string>
 
-<!--    forgot pass page-->
+    <!--    forgot pass page-->
     <string name="forgot_title">Մոռացել եք գաղտնաբառը?</string>
     <string name="forgot_caption">Մի անհանգստացեք! Խնդրում ենք մուտքագրել \nէլ․փոստը</string>
     <string name="email">Էլ․ փոստ</string>
     <string name="send">Ուղարկել</string>
 
-<!--    login paage-->
+    <!--    login paage-->
     <string name="login_title">Բարի գալուստ! Ուրախ ենք քեզ տեսնել</string>
     <string name="password">Գաղտնաբառ</string>
     <string name="forgot_pass">Մոռացել եք գաղտնաբառը?</string>
     <string name="login">Մուտք</string>
     <string name="or_login_with">կամ</string>
 
-<!--    home page-->
+    <!--    home page-->
     <string name="username">Օգտանուն</string>
     <string name="home_title">Քուիզեր</string>
     <string name="kargin_mainpage">Կարգին</string>
     <string name="vitamin_mainpage">Վիտամին</string>
     <string name="choose_quiz">Ընտրել</string>
 
-<!--    register page-->
+    <!--    register page-->
     <string name="register">Գրանցվել</string>
     <string name="register_title">Սկսելու համար գրանցվեք</string>
 
-<!--    settings page-->
+    <!--    settings page-->
     <string name="edit_profile">Խմբագրել</string>
     <string name="language">Լեզու</string>
     <string name="terms_policies">Պայմաններ և կանոններ</string>
     <string name="feedback">Կապ մեզ հետ</string>
     <string name="logout">Դուրս գալ</string>
 
-<!--    nav bar-->
+    <!--    nav bar-->
     <string name="home">Գլխավոր</string>
     <string name="discover">Բացահայտել</string>
     <string name="leaderboard">Աղյուսակ</string>
     <string name="settings">Կարգավորումներ</string>
 
-<!--    kargin fragment-->
+    <!--    kargin fragment-->
     <string name="kargin_fragment_title">Կարգին</string>
     <string name="multer">Կարգին մուլտեր</string>
     <string name="serial">Կարգին սերիալ</string>

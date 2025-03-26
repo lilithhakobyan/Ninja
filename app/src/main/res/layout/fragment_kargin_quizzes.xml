@@ -49,7 +49,7 @@
 
     <!-- Title Section -->
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/kargin_page_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/kargin_fragment_title"
@@ -73,7 +73,7 @@
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
         android:backgroundTint="#D2D2DB"
-        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/kargin_page_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
