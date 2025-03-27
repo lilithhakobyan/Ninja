@@ -330,7 +330,7 @@ public class QuizActivity extends AppCompatActivity {
         // Add the first quiz question
         dbHelper.addQuizQuestion(
                 "Geography Quiz",
-                "https://youtu.be/l8FL_MJmyJ0", // YouTube video URL
+                "https://www.youtu.be/l8FL_MJmyJ0?rel=0", // YouTube video URL
                 "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
                 "Տրեներ,բայց ես նորմալ հայերեն հասկանում եմ",
                 "Էն ժամանակ, ոնց որ, սենց չոտկի չէիր ասում",
@@ -340,7 +340,7 @@ public class QuizActivity extends AppCompatActivity {
 
         dbHelper.addQuizQuestion(
                 "Geography Quiz",
-                "https://youtu.be/D4s5P4VqLf0", // YouTube video URL
+                "https://www.youtu.be/D4s5P4VqLf0?rel=0", // YouTube video URL
                 "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
                 "Ապեր, ասում եմ՝ շինանյութի խանութ ա։",
                 "Էս մեր անուշ ախպերն էլ, էն մյուս կեսն ա ուզում",
@@ -350,7 +350,7 @@ public class QuizActivity extends AppCompatActivity {
 
         dbHelper.addQuizQuestion(
                 "Geography Quiz",
-                "https://youtu.be/6FjkW7G4bTg", // YouTube video URL
+                "https://www.youtu.be/6FjkW7G4bTg?rel=0", // YouTube video URL
                 "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
                 "Հա բա,նախարար մարդ եմ",
                 "Ապեր ջան կարող ա ես գիժ եմ,բայց ես տուպոյ չեմ",
@@ -360,7 +360,7 @@ public class QuizActivity extends AppCompatActivity {
 
         dbHelper.addQuizQuestion(
                 "Geography Quiz",
-                "https://youtu.be/mKp2EHzZpAw", // YouTube video URL
+                "https://www.youtu.be/mKp2EHzZpAw?rel=0", // YouTube video URL
                 "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
                 "Բա ինչի՞ ա պետք որ",
                 "Պետք ա` գնա առ",
@@ -371,7 +371,7 @@ public class QuizActivity extends AppCompatActivity {
         // Add the second quiz question
         dbHelper.addQuizQuestion(
                 "Geography Quiz",
-                "https://youtu.be/ZeY5l_HzkzA", // YouTube video URL
+                "https://www.youtu.be/ZeY5l_HzkzA?rel=0", // YouTube video URL
                 "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
                 "Պոպոք ու սմետան",
                 "Արա չես ջոգում որ ձեն չենք հանում ուրեմն կարտոշկա ա",
@@ -382,7 +382,7 @@ public class QuizActivity extends AppCompatActivity {
         // Add the third quiz question
         dbHelper.addQuizQuestion(
                 "Math Quiz",
-                "https://youtu.be/OuZlhjRBXzc", // YouTube video URL
+                "https://www.youtu.be/OuZlhjRBXzc?rel=0", // YouTube video URL
                 "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
                 "5 անգամ հրավիրել են մարդիկ,արդեն ամոթ ա",
                 "Շատ ճիշտ նկատեցիք,այո",
@@ -459,11 +459,26 @@ public class QuizActivity extends AppCompatActivity {
 
         // Video Handling (Unique video per question)
         String videoId = extractYouTubeVideoId(currentQuestion.getVideoUrl());
+//        if (videoId != null) {
+//            String videoHtml = "<html><body style='margin:0;padding:0;'>"
+//                    + "<iframe width='100%' height='100%' "
+//                    + "src='https://www.youtube.com/embed/" + videoId
+//                    + "?autoplay=1&rel=0&controls=1&modestbranding=1' "
+//                    + "frameborder='0' allowfullscreen></iframe></body></html>";
+//
+//            webView.getSettings().setJavaScriptEnabled(true);
+//            webView.setWebViewClient(new WebViewClient());
+//            webView.loadData(videoHtml, "text/html", "utf-8");
+//            webView.setVisibility(View.VISIBLE);
+//        } else {
+//            webView.setVisibility(View.INVISIBLE);
+//            webView.loadUrl("about:blank");
+//        }
         if (videoId != null) {
             String videoHtml = "<html><body style='margin:0;padding:0;'>"
                     + "<iframe width='100%' height='100%' "
                     + "src='https://www.youtube.com/embed/" + videoId
-                    + "?autoplay=1&rel=0&controls=1&modestbranding=1' "
+                    + "?autoplay=1&rel=0&controls=1&modestbranding=1&showinfo=0' "
                     + "frameborder='0' allowfullscreen></iframe></body></html>";
 
             webView.getSettings().setJavaScriptEnabled(true);
@@ -471,9 +486,10 @@ public class QuizActivity extends AppCompatActivity {
             webView.loadData(videoHtml, "text/html", "utf-8");
             webView.setVisibility(View.VISIBLE);
         } else {
+            Log.e("QuizActivity", "Invalid video URL: " + currentQuestion.getVideoUrl());
             webView.setVisibility(View.INVISIBLE);
-            webView.loadUrl("about:blank");
         }
+
 
         int progress = (int) (((float) (index + 1) / maxQuestions) * 100);
         progressBar.setProgress(progress);
