@@ -79,7 +79,7 @@
         <Button
             android:id="@+id/ans1"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:text="a"
             android:backgroundTint="#F2ECE8"
             android:textColor="#000"
@@ -90,7 +90,7 @@
         <Button
             android:id="@+id/ans2"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:text="b"
             android:backgroundTint="#F2ECE8"
             android:textColor="#000"
@@ -100,7 +100,7 @@
         <Button
             android:id="@+id/ans3"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:text="c"
             android:backgroundTint="#F2ECE8"
             android:textColor="#000"
@@ -113,7 +113,7 @@
         android:id="@+id/nextQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Next"
+        android:text="Հաջորդը"
         android:backgroundTint="#4A5DF3"
         android:textColor="#FFFFFF"
         android:textStyle="bold"

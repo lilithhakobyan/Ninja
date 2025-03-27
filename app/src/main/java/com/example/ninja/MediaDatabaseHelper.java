@@ -93,4 +93,12 @@ public class MediaDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return quizList;  // Return the list of all quiz questions
     }
+
+    public void clearQuizQuestions() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_MEDIA); // Delete all rows from the media table
+        db.close();
+    }
+
+
 }

@@ -265,7 +265,7 @@ public class QuizActivity extends AppCompatActivity {
     List<QuizQuestion> quizList;
     List<QuizQuestion> selectedQuestions; // Only 3 unique questions
     int currentIndex = 0;
-    int maxQuestions = 3; // Limit to 3 questions
+    int maxQuestions = 6; // Limit to 3 questions
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -284,7 +284,10 @@ public class QuizActivity extends AppCompatActivity {
 
         dbHelper = new MediaDatabaseHelper(this);
 
-        // Fetch all quiz questions
+        // Add quiz questions (call this method to add questions to the database)
+        addQuizQuestions();
+
+        // Fetch all quiz questions from the database
         quizList = dbHelper.getAllQuizQuestions();
         if (quizList.isEmpty()) {
             Toast.makeText(this, "No quiz data found!", Toast.LENGTH_SHORT).show();
@@ -321,6 +324,73 @@ public class QuizActivity extends AppCompatActivity {
         });
     }
 
+    // Method to add quiz questions to the database
+    private void addQuizQuestions() {
+        dbHelper.clearQuizQuestions();
+        // Add the first quiz question
+        dbHelper.addQuizQuestion(
+                "Geography Quiz",
+                "https://youtu.be/l8FL_MJmyJ0", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Տրեներ,բայց ես նորմալ հայերեն հասկանում եմ",
+                "Էն ժամանակ, ոնց որ, սենց չոտկի չէիր ասում",
+                "Ապե, դու լուրջ ես ասու՞մ",
+                "Տրեներ,բայց ես նորմալ հայերեն հասկանում եմ" // Correct answer
+        );
+
+        dbHelper.addQuizQuestion(
+                "Geography Quiz",
+                "https://youtu.be/D4s5P4VqLf0", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Ապեր, ասում եմ՝ շինանյութի խանութ ա։",
+                "Էս մեր անուշ ախպերն էլ, էն մյուս կեսն ա ուզում",
+                "Էս էլ էտ քյալն ա",
+                "Էս մեր անուշ ախպերն էլ, էն մյուս կեսն ա ուզում" // Correct answer
+        );
+
+        dbHelper.addQuizQuestion(
+                "Geography Quiz",
+                "https://youtu.be/6FjkW7G4bTg", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Հա բա,նախարար մարդ եմ",
+                "Ապեր ջան կարող ա ես գիժ եմ,բայց ես տուպոյ չեմ",
+                "Ոչինչ,կմեծանաս ինքդ կհասկանաս",
+                "Ապեր ջան կարող ա ես գիժ եմ,բայց ես տուպոյ չեմ" // Correct answer
+        );
+
+        dbHelper.addQuizQuestion(
+                "Geography Quiz",
+                "https://youtu.be/mKp2EHzZpAw", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Բա ինչի՞ ա պետք որ",
+                "Պետք ա` գնա առ",
+                "Ձեզի ջինըս պե՞տք ա",
+                "Բա ինչի՞ ա պետք որ" // Correct answer
+        );
+
+        // Add the second quiz question
+        dbHelper.addQuizQuestion(
+                "Geography Quiz",
+                "https://youtu.be/ZeY5l_HzkzA", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Պոպոք ու սմետան",
+                "Արա չես ջոգում որ ձեն չենք հանում ուրեմն կարտոշկա ա",
+                "Արա մի հատ ոտերդ քաշի,ապուշ լակոտ",
+                "Արա չես ջոգում որ ձեն չենք հանում ուրեմն կարտոշկա ա" // Correct answer
+        );
+
+        // Add the third quiz question
+        dbHelper.addQuizQuestion(
+                "Math Quiz",
+                "https://youtu.be/OuZlhjRBXzc", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "5 անգամ հրավիրել են մարդիկ,արդեն ամոթ ա",
+                "Շատ ճիշտ նկատեցիք,այո",
+                "Ապեր ստեղ պահի,աչքիս սխալ մարշուտկա եմ նստել",
+                "Ապեր ստեղ պահի,աչքիս սխալ մարշուտկա եմ նստել" // Correct answer
+        );
+    }
+
     // Method to filter out questions with duplicate video URLs
     private List<QuizQuestion> getUniqueVideoQuestions(List<QuizQuestion> quizList, int maxQuestions) {
         List<QuizQuestion> uniqueQuestions = new ArrayList<>();
@@ -340,7 +410,7 @@ public class QuizActivity extends AppCompatActivity {
         return uniqueQuestions;
     }
 
-
+    // Method to check the selected answer
     private void checkAnswer(String selectedAnswer) {
         QuizQuestion currentQuestion = selectedQuestions.get(currentIndex);
 
@@ -367,6 +437,7 @@ public class QuizActivity extends AppCompatActivity {
         nextQuestion.setEnabled(true);
     }
 
+    // Method to load the current question
     private void loadQuestion(int index) {
         Log.d("QuizActivity", "Loading Question: Current Index = " + index);
 
@@ -408,6 +479,7 @@ public class QuizActivity extends AppCompatActivity {
         progressBar.setProgress(progress);
     }
 
+    // Method to extract YouTube video ID
     private String extractYouTubeVideoId(String url) {
         if (url == null || url.isEmpty()) return null;
         String pattern = "(?:youtube\\.com/embed/|youtube\\.com/watch\\?v=|youtu\\.be/)([^?&]*)";
