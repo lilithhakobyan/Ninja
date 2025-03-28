@@ -6,11 +6,13 @@ import android.widget.TextView;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+
 public class ScorePage extends AppCompatActivity {
 
-
-    TextView total_questions, scoreText, completion, correct, wrong ;
-    Button homeButton,leaderboardBtn,again;
+    TextView total_questions, scoreText, completion, correct, wrong;
+    Button homeButton, leaderboardBtn, again;
+    CircularProgressIndicator progressCircle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,22 +28,36 @@ public class ScorePage extends AppCompatActivity {
         correct = findViewById(R.id.correct);
         wrong = findViewById(R.id.wrong);
 
+        // Reference to the CircularProgressIndicator
+        progressCircle = findViewById(R.id.progress_circle);
+
         // Get score from intent
         int score = getIntent().getIntExtra("score", 0);
         int totalQuestions = getIntent().getIntExtra("totalQuestions", 0);
-        int one_quest_procent = 100/totalQuestions;
         int wrongAnswers = totalQuestions - score;
 
         // Display the score
         scoreText.setText(score + "/" + totalQuestions);
-        completion.setText("Իմ պրոգրեսը " + " " + score*one_quest_procent + "%");
-        if(score==totalQuestions){
+
+        // Calculate the progress percentage
+        float percentage = (float) score / totalQuestions * 100;
+        int roundedProgress = Math.round(percentage);
+
+        // Update completion text
+        completion.setText("Իմ պրոգրեսը " + " " + roundedProgress + "%");
+
+        // If score is equal to total questions, set progress to 100%
+        if (score == totalQuestions) {
             completion.setText("Իմ պրոգրեսը 100%");
         }
+
+        // Set other text values
         correct.setText("Ճիշտ " + " " + score);
         wrong.setText("Սխալ " + " " + wrongAnswers);
         total_questions.setText("Ընդհանուր " + " " + totalQuestions);
 
+        // Update the CircularProgressIndicator
+        progressCircle.setProgress(roundedProgress);
 
         // Button to return to main activity
         homeButton.setOnClickListener(v -> {
@@ -61,6 +77,5 @@ public class ScorePage extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-
     }
 }

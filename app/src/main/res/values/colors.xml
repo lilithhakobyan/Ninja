@@ -7,6 +7,7 @@
     <color name="dark_red">#640E16</color>
     <color name="light_gray">#878686</color>
     <color name="purple">#673AB7</color>
-    <color name="green">#8BC34A</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#E42615</color>
     <color name="orange">#FF5722</color>
 </resources>

@@ -265,7 +265,7 @@ public class QuizActivity extends AppCompatActivity {
     List<QuizQuestion> quizList;
     List<QuizQuestion> selectedQuestions; // Only 3 unique questions
     int currentIndex = 0;
-    int maxQuestions = 6; // Limit to 3 questions
+    int maxQuestions = 6; // Limit to 6 questions
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -280,7 +280,7 @@ public class QuizActivity extends AppCompatActivity {
         ans3 = findViewById(R.id.ans3);
         nextQuestion = findViewById(R.id.nextQuestion);
         webView = findViewById(R.id.webView);
-        progressBar = findViewById(R.id.progressBar1);
+        progressBar = findViewById(R.id.progressBar);
 
         dbHelper = new MediaDatabaseHelper(this);
 
@@ -425,12 +425,10 @@ public class QuizActivity extends AppCompatActivity {
 
         if (selectedButton != null) {
             if (selectedAnswer.equals(currentQuestion.getCorrectAnswer())) {
-                selectedButton.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
-                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
+                selectedButton.setBackgroundColor(getResources().getColor(R.color.green));
                 score++;
             } else {
-                selectedButton.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
-                Toast.makeText(this, "Wrong!", Toast.LENGTH_SHORT).show();
+                selectedButton.setBackgroundColor(getResources().getColor(R.color.red));
             }
         }
 

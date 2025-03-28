@@ -23,24 +23,29 @@
 
     <!-- Progress Indicator -->
     <ProgressBar
-        android:id="@+id/progressBar1"
-        android:layout_width="50dp"
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
         android:layout_height="4dp"
+        android:max="100"
+        android:progress="0"
+        android:progressTint="@color/blue"
+        android:backgroundTint="@android:color/darker_gray"
+        android:clipToPadding="false"
         android:layout_below="@id/quizTitle"
         android:layout_marginTop="8dp"
-        android:background="#4A5EE4"
-        android:layout_marginHorizontal="20dp"
-        />
+        android:layout_marginHorizontal="20dp"/>
 
+    <!-- Simple Line -->
     <View
         android:id="@+id/progressBar2"
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="#E0E0E0"
-        android:layout_below="@id/progressBar1"
-        android:layout_marginTop="4dp"
-        android:layout_marginHorizontal="20dp"
-        />
+        android:layout_below="@id/progressBar"
+        android:layout_marginTop="6dp"
+        android:layout_marginHorizontal="20dp"/>
+
 
     <!-- Question Text -->
     <TextView
