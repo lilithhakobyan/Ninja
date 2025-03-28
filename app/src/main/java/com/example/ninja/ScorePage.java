@@ -1,12 +1,14 @@
 package com.example.ninja;
 
-import android.content.Intent;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Button;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.progressindicator.CircularProgressIndicator;
+import android.content.Intent;
 
 public class ScorePage extends AppCompatActivity {
 
@@ -19,6 +21,7 @@ public class ScorePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_page);
 
+        // Initialize your UI elements
         scoreText = findViewById(R.id.scoreText);
         homeButton = findViewById(R.id.btn_home);
         leaderboardBtn = findViewById(R.id.btn_leaderboard);
@@ -27,11 +30,9 @@ public class ScorePage extends AppCompatActivity {
         total_questions = findViewById(R.id.total_questions);
         correct = findViewById(R.id.correct);
         wrong = findViewById(R.id.wrong);
-
-        // Reference to the CircularProgressIndicator
         progressCircle = findViewById(R.id.progress_circle);
 
-        // Get score from intent
+        // Get score and totalQuestions from the Intent
         int score = getIntent().getIntExtra("score", 0);
         int totalQuestions = getIntent().getIntExtra("totalQuestions", 0);
         int wrongAnswers = totalQuestions - score;
@@ -39,7 +40,7 @@ public class ScorePage extends AppCompatActivity {
         // Display the score
         scoreText.setText(score + "/" + totalQuestions);
 
-        // Calculate the progress percentage
+        // Calculate progress percentage
         float percentage = (float) score / totalQuestions * 100;
         int roundedProgress = Math.round(percentage);
 
@@ -56,10 +57,12 @@ public class ScorePage extends AppCompatActivity {
         wrong.setText("Սխալ " + " " + wrongAnswers);
         total_questions.setText("Ընդհանուր " + " " + totalQuestions);
 
-        // Update the CircularProgressIndicator
-        progressCircle.setProgress(roundedProgress);
+        // Animate progress
+        animateProgress(roundedProgress);
 
-        // Button to return to main activity
+        // Animate text sliding in
+        animateTextSlide();
+
         homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(ScorePage.this, MainActivity.class);
             startActivity(intent);
@@ -78,4 +81,24 @@ public class ScorePage extends AppCompatActivity {
             finish();
         });
     }
+
+    private void animateProgress(int targetProgress) {
+        ValueAnimator animator = ValueAnimator.ofInt(0, targetProgress);
+        animator.setDuration(1000);
+        animator.addUpdateListener(animation -> {
+            int progress = (int) animation.getAnimatedValue();
+            progressCircle.setProgress(progress);
+        });
+        animator.start();
+    }
+
+
+
+    private void animateTextSlide() {
+        ObjectAnimator slideInScore = ObjectAnimator.ofFloat(scoreText, "translationX", -500f, 0f);  // -500f is off-screen to the left
+        slideInScore.setDuration(1000);
+        slideInScore.start();
+    }
+
+
 }
