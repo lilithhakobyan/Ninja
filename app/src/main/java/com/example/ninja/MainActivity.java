@@ -1,6 +1,7 @@
 package com.example.ninja;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         vitaminButton = findViewById(R.id.vitamin_card_button);
 
         karginButton.setOnClickListener(v -> openFragment(new Kargin_quizzes()));
+        vitaminButton.setOnClickListener(v -> openActivity());
+
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
@@ -113,5 +116,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void openActivity() {
+
+        Intent intent = new Intent(MainActivity.this, VitaminQuizActivity.class);
+
+        startActivity(intent);
     }
 }

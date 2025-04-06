@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7EFE3"
+    android:padding="16dp"
+    tools:context=".VitaminQuizActivity">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/quizTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Վիտամին"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#191326"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginHorizontal="20dp"
+            />
+
+        <!-- Progress Indicator -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="@color/blue"
+            android:backgroundTint="@android:color/darker_gray"
+            android:clipToPadding="false"
+            android:layout_below="@id/quizTitle"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="20dp"/>
+
+        <!-- Simple Line -->
+        <View
+            android:id="@+id/progressBar2"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#E0E0E0"
+            android:layout_below="@id/progressBar"
+            android:layout_marginTop="6dp"
+            android:layout_marginHorizontal="20dp"/>
+
+
+        <!-- Question Text -->
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your question will appear here"
+            android:textSize="18sp"
+            android:textColor="#191326"
+            android:layout_below="@id/progressBar2"
+            android:layout_marginTop="24dp"
+            android:layout_marginHorizontal="20dp"
+            />
+
+        <!-- Quiz Card -->
+        <RelativeLayout
+            android:id="@+id/quizCard"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext"
+            android:padding="15dp"
+            android:layout_below="@id/questionText"
+            android:layout_marginTop="24dp">
+
+            <!-- WebView for Video -->
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <!-- Answer Options -->
+            <Button
+                android:id="@+id/ans1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="a"
+                android:backgroundTint="#F2ECE8"
+                android:textColor="#000"
+                android:layout_below="@id/webView"
+                android:layout_marginTop="8dp"
+                />
+
+            <Button
+                android:id="@+id/ans2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="b"
+                android:backgroundTint="#F2ECE8"
+                android:textColor="#000"
+                android:layout_below="@id/ans1"
+                android:layout_marginTop="8dp"/>
+
+            <Button
+                android:id="@+id/ans3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="c"
+                android:backgroundTint="#F2ECE8"
+                android:textColor="#000"
+                android:layout_below="@id/ans2"
+                android:layout_marginTop="8dp"/>
+        </RelativeLayout>
+
+        <!-- Next Button -->
+        <Button
+            android:id="@+id/nextQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Հաջորդը"
+            android:backgroundTint="#4A5DF3"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_below="@id/quizCard"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="20dp"
+            />
+    </RelativeLayout>

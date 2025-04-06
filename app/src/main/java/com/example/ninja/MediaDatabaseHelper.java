@@ -25,12 +25,24 @@ public class MediaDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_OPTION3 = "option3";
     private static final String COLUMN_CORRECT_ANSWER = "correct_answer";
 
+    private static final String TABLE_VITAMIN = "vitamin_quiz";
+
     // Create the table query
     private static final String CREATE_TABLE_MEDIA =
             "CREATE TABLE " + TABLE_MEDIA + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_TITLE + " TEXT NOT NULL, " +
                     COLUMN_VIDEO_URL + " TEXT NOT NULL, " +
+                    COLUMN_QUESTION + " TEXT NOT NULL, " +
+                    COLUMN_OPTION1 + " TEXT NOT NULL, " +
+                    COLUMN_OPTION2 + " TEXT NOT NULL, " +
+                    COLUMN_OPTION3 + " TEXT NOT NULL, " +
+                    COLUMN_CORRECT_ANSWER + " TEXT NOT NULL" + ");";
+
+    private static final String CREATE_TABLE_VITAMIN =
+            "CREATE TABLE " + TABLE_VITAMIN + " (" +
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_TITLE + " TEXT NOT NULL, " +
                     COLUMN_QUESTION + " TEXT NOT NULL, " +
                     COLUMN_OPTION1 + " TEXT NOT NULL, " +
                     COLUMN_OPTION2 + " TEXT NOT NULL, " +
@@ -44,11 +56,13 @@ public class MediaDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_MEDIA);
+        db.execSQL(CREATE_TABLE_VITAMIN);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEDIA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_VITAMIN);
         onCreate(db);
     }
 

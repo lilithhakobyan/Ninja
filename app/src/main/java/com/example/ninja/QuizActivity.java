@@ -263,7 +263,7 @@ public class QuizActivity extends AppCompatActivity {
 
     MediaDatabaseHelper dbHelper;
     List<QuizQuestion> quizList;
-    List<QuizQuestion> selectedQuestions; // Only 3 unique questions
+    List<QuizQuestion> selectedQuestions;
     int currentIndex = 0;
     int maxQuestions = 6; // Limit to 6 questions
 
