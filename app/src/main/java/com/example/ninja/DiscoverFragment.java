@@ -1,5 +1,7 @@
 package com.example.ninja;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,36 +9,36 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DiscoverFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
+import android.util.Log;
+
+
 public class DiscoverFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+
+    private TextView usernameTextView;
+
+
+    Button gol, kartoshka,dzmeruk,tupoy,bordo;
 
     public DiscoverFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DiscoverFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static DiscoverFragment newInstance(String param1, String param2) {
         DiscoverFragment fragment = new DiscoverFragment();
         Bundle args = new Bundle();
@@ -59,6 +61,87 @@ public class DiscoverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_discover, container, false);
+        View view = inflater.inflate(R.layout.fragment_discover, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        gol = view.findViewById(R.id.yt_gol);
+        kartoshka = view.findViewById(R.id.yt_kartoshka);
+        dzmeruk = view.findViewById(R.id.yt_dzmeruk);
+        tupoy = view.findViewById(R.id.yt_tupoy);
+        bordo = view.findViewById(R.id.yt_bordo);
+
+        usernameTextView = view.findViewById(R.id.username);
+
+
+        gol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://youtu.be/QVR7aa5cb5I?si=pu92EV2JuxEvV5y_";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        kartoshka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://youtu.be/H_AWoRuyy5U?si=9dQY8YgZJLtdB9-r";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        dzmeruk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://youtu.be/FcoYpp8_PM0?si=SJ_7a7UdYi3nZL0d";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        tupoy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://youtu.be/YPieQWuJJFg?si=_OnS3DhMyKW6a2pa";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        bordo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://youtu.be/SWF0HecSwYA?si=BYm8Mh3XwOBO0IHL";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        loadUserData();
+
+
+        return view;
+
     }
+
+    private void loadUserData() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            db.collection("users").document(user.getUid())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String username = documentSnapshot.getString("username");
+                            usernameTextView.setText(username);
+                        }
+                    })
+                    .addOnFailureListener(e -> Log.e("DiscoverFragment", "Failed to load user data: " + e.getMessage()));
+        }
+    }
+
+
+
 }

@@ -1,14 +1,250 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiscoverFragment">
+    android:background="#FFF5EB">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Title Section -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <!-- Username -->
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/username"
+            android:layout_marginTop="35dp"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Profile Picture -->
+        <ImageView
+            android:id="@+id/profile_picture"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/baseline_person_24"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/circle_background" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <TextView
+        android:id="@+id/quizzes_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/discover"
+        android:textSize="24sp"
+        android:textColor="#000"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toBottomOf="@id/top_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <RelativeLayout
+        android:id="@+id/gol"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_edittext"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/quizzes_title"
+        tools:layout_editor_absoluteX="20dp">
+
+        <ImageView
+            android:id="@+id/one"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:src="@drawable/gol"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toEndOf="@id/one"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:text="Սկետչ 123" />
+
+        <Button
+            android:id="@+id/yt_gol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Նայել" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/kartoshka"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_edittext"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/gol"
+        tools:layout_editor_absoluteX="20dp">
+
+        <ImageView
+            android:id="@+id/two"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:src="@drawable/kartoshka"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toEndOf="@id/two"
+            android:gravity="center"
+            android:paddingStart="15dp"
+            android:text="Կարտոշկա" />
+
+
+        <Button
+            android:id="@+id/yt_kartoshka"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Նայել" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/dzmeruk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_edittext"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/kartoshka"
+        tools:layout_editor_absoluteX="20dp">
+
+        <ImageView
+            android:id="@+id/three"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:src="@drawable/dzmeruk"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toEndOf="@id/three"
+            android:paddingStart="15dp"
+            android:gravity="center"
+            android:text="Սկետչ 234" />
+
+        <Button
+            android:id="@+id/yt_dzmeruk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Նայել" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/tupoy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_edittext"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/dzmeruk"
+        tools:layout_editor_absoluteX="20dp">
+
+        <ImageView
+            android:id="@+id/four"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:src="@drawable/tupoy"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toEndOf="@id/four"
+            android:paddingStart="15dp"
+            android:gravity="center"
+            android:text="Սկետչ 147" />
+
+        <Button
+            android:id="@+id/yt_tupoy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Նայել" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/bordo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_edittext"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/tupoy"
+        tools:layout_editor_absoluteX="20dp">
+
+        <ImageView
+            android:id="@+id/five"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:src="@drawable/bordo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_toEndOf="@id/five"
+            android:paddingStart="15dp"
+            android:gravity="center"
+            android:text="Սկետչ 432" />
+
+        <Button
+            android:id="@+id/yt_bordo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Նայել" />
+
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:visibility="gone"
+        android:background="#FFF5EB"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
