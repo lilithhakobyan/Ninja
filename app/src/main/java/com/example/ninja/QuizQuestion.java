@@ -1,7 +1,8 @@
 package com.example.ninja;
 
 public class QuizQuestion {
-    private String videoUrl;
+    private String mediaUrl;
+    private String mediaType;
     private String question;
     private String option1;
     private String option2;
@@ -9,8 +10,9 @@ public class QuizQuestion {
     private String correctAnswer;
 
     // Constructor
-    public QuizQuestion(String videoUrl, String question, String option1, String option2, String option3, String correctAnswer) {
-        this.videoUrl = videoUrl;
+    public QuizQuestion(String mediaUrl, String mediaType, String question, String option1, String option2, String option3, String correctAnswer) {
+        this.mediaUrl = mediaUrl;
+        this.mediaType = mediaType;
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
@@ -19,12 +21,20 @@ public class QuizQuestion {
     }
 
     // Getters and Setters
-    public String getVideoUrl() {
-        return videoUrl;
+    public String getMediaUrl() {
+        return mediaUrl;
     }
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
+    public void setMediaUrl(String mediaUrl) {
+        this.mediaUrl = mediaUrl;
+    }
+
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
     }
 
     public String getQuestion() {

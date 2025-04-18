@@ -97,12 +97,13 @@ public class VitaminQuizActivity extends AppCompatActivity {
         // Add the first vitamin quiz question
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
-                "https://www.youtu.be/l8FL_MJmyJ0?rel=0", // YouTube video URL
-                "What is the main benefit of Vitamin C?",
-                "Improves vision",
-                "Boosts immunity",
-                "Strengthens bones",
-                "Boosts immunity" // Correct answer
+                "https://www.youtube.com/watch?v=RlEeH5x0mH4", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Ճոճոլ",
+                "Կոկո",
+                "Ծկուլ",
+                "Ճոճոլ", // Correct answer
+                "video"
         );
 
         // Add the second vitamin quiz question
@@ -113,7 +114,8 @@ public class VitaminQuizActivity extends AppCompatActivity {
                 "Vitamin A",
                 "Vitamin B6",
                 "Vitamin D",
-                "Vitamin A" // Correct answer
+                "Vitamin A",// Correct answer
+                "video"
         );
 
         // Add the third vitamin quiz question
@@ -124,40 +126,46 @@ public class VitaminQuizActivity extends AppCompatActivity {
                 "Vitamin D",
                 "Vitamin E",
                 "Vitamin K",
-                "Vitamin D" // Correct answer
+                "Vitamin D", // Correct answer
+                "video"
         );
+
+
 
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
-                "https://youtu.be/tXpYQ93zKJo" +
-                        "", // YouTube video URL
-                "What is the main benefit of Vitamin C?",
-                "Improves vision",
-                "Boosts immunity",
-                "Strengthens bones",
-                "Boosts immunity" // Correct answer
+                "https://i.postimg.cc/XvfWk9QN/Screenshot-2025-04-12-161540.png",
+                "Ո՞ր արտահայտությունն է պատկանում տվյալ հերոսին",
+                "Բյուրականի 2 հեկտար հողերս գլխիդ",
+                "Բա որ գոմի դուռ չի, դու մեջը ինչ գործ ունես",
+                "Պայքարի՛ դու քո դեմ",
+                "Բա որ գոմի դուռ չի, դու մեջը ինչ գործ ունես",
+                "image"
+
         );
 
         // Add the second vitamin quiz question
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
-                "https://youtu.be/_ZkcJelUOiE", // YouTube video URL
-                "Which vitamin is essential for healthy skin?",
-                "Vitamin A",
-                "Vitamin B6",
-                "Vitamin D",
-                "Vitamin A" // Correct answer
+                "https://i.postimg.cc/fRMV67gF/Screenshot-2025-04-12-184001.png", // YouTube video URL
+                "Ո՞ր արտահայտությունն է պատկանում տվյալ հերոսին",
+                "Они обманщики",
+                "Вот это вечеринка",
+                "Դուք ուղղակի գենիուս եք",
+                "Они обманщики",
+                "image"
         );
 
         // Add the third vitamin quiz question
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
-                "https://youtu.be/xzBvPj1HFHs", // YouTube video URL
+                "https://whyp.it/tracks/272649/ayrvum-em-es-chem-karox-ayspes-audiotrimmercom-1?token=xUE7N", // YouTube video URL
                 "Which vitamin helps in calcium absorption?",
                 "Vitamin D",
                 "Vitamin E",
                 "Vitamin K",
-                "Vitamin D" // Correct answer
+                "Vitamin D" ,
+                "audio"
         );
 
 
@@ -169,7 +177,7 @@ public class VitaminQuizActivity extends AppCompatActivity {
         Set<String> videoUrls = new HashSet<>();  // Set to track unique video URLs
 
         for (QuizQuestion question : quizList) {
-            String videoUrl = question.getVideoUrl();
+            String videoUrl = question.getMediaUrl();
             if (!videoUrls.contains(videoUrl)) {
                 videoUrls.add(videoUrl);
                 uniqueQuestions.add(question);
@@ -228,22 +236,43 @@ public class VitaminQuizActivity extends AppCompatActivity {
         ans3.setEnabled(true);
 
         // Video Handling (Unique video per question)
-        String videoId = extractYouTubeVideoId(currentQuestion.getVideoUrl());
-        if (videoId != null) {
-            String videoHtml = "<html><body style='margin:0;padding:0;'>"
-                    + "<iframe width='100%' height='100%' "
-                    + "src='https://www.youtube.com/embed/" + videoId
-                    + "?autoplay=1&rel=0&controls=1&modestbranding=1&showinfo=0' "
-                    + "frameborder='0' allowfullscreen></iframe></body></html>";
+        String mediaUrl = currentQuestion.getMediaUrl();
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
 
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.setWebViewClient(new WebViewClient());
-            webView.loadData(videoHtml, "text/html", "utf-8");
+        if (mediaUrl.contains("youtu.be") || mediaUrl.contains("youtube.com")) {
+            String videoId = extractYouTubeVideoId(mediaUrl);
+            if (videoId != null) {
+                String videoHtml = "<html><body style='margin:0;padding:0;'>"
+                        + "<iframe width='100%' height='100%' "
+                        + "src='https://www.youtube.com/embed/" + videoId
+                        + "?autoplay=1&rel=0&controls=1&modestbranding=1&showinfo=0' "
+                        + "frameborder='0' allowfullscreen></iframe></body></html>";
+
+                webView.loadData(videoHtml, "text/html", "utf-8");
+                webView.setVisibility(View.VISIBLE);
+            } else {
+                Log.e("VitaminQuizActivity", "Invalid YouTube URL: " + mediaUrl);
+                webView.setVisibility(View.INVISIBLE);
+            }
+        } else if (mediaUrl.endsWith(".jpg") || mediaUrl.endsWith(".png") || mediaUrl.endsWith(".jpeg") || mediaUrl.endsWith(".webp")) {
+            // Load image in WebView
+            String imageHtml = "<html><body style='margin:0;padding:0;'>"
+                    + "<img src='" + mediaUrl + "' width='100%' height='100%' style='object-fit:contain;'/>"
+                    + "</body></html>";
+            webView.loadData(imageHtml, "text/html", "utf-8");
             webView.setVisibility(View.VISIBLE);
-        } else {
-            Log.e("VitaminQuizActivity", "Invalid video URL: " + currentQuestion.getVideoUrl());
-            webView.setVisibility(View.INVISIBLE);
         }
+        else  {
+            String audioHtml = "<html><body style='margin:0;padding:0;'>"
+                    + "<audio controls autoplay style='width:100%;'>"
+                    + "<source src='" + mediaUrl + "' type='audio/mpeg'>"
+                    + "Your browser does not support the audio element."
+                    + "</audio></body></html>";
+            webView.loadData(audioHtml, "text/html", "utf-8");
+            webView.setVisibility(View.VISIBLE);
+        }
+
 
         int progress = (int) (((float) (index + 1) / maxQuestions) * 100);
         progressBar.setProgress(progress);
