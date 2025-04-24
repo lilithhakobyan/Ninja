@@ -79,6 +79,16 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         });
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String firebaseUID = user.getUid(); // Use this to identify user in SQLite
+            String displayName = user.getDisplayName(); // Optional, for name
+            if (displayName == null || displayName.isEmpty()) {
+                displayName = user.getEmail(); // Fallback
+            }
+        }
+
+
         String fullText = "Don't have an account? Register Now";
         SpannableString spannable = new SpannableString(fullText);
         spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#4A5DF3")),
@@ -178,4 +188,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
     }
+
+
 }

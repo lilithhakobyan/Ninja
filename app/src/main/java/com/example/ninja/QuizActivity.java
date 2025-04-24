@@ -14,6 +14,8 @@ import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -52,6 +54,15 @@ public class QuizActivity extends AppCompatActivity {
         dbHelper = new MediaDatabaseHelper(this);
 
         addQuizQuestions();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(this, "Please log in to continue", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(QuizActivity.this, LoginActivity.class));
+            finish();
+            return;
+        }
+
 
         quizList = dbHelper.getAllQuizQuestions();
         if (quizList.isEmpty()) {

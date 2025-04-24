@@ -32,7 +32,7 @@ public class VitaminQuizActivity extends AppCompatActivity {
     List<QuizQuestion> quizList;
     List<QuizQuestion> selectedQuestions;
     int currentIndex = 0;
-    int maxQuestions = 6; // Limit to 6 questions for Vitamin Quiz
+    int maxQuestions = 8; // Limit to 6 questions for Vitamin Quiz
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -94,7 +94,6 @@ public class VitaminQuizActivity extends AppCompatActivity {
     // Method to add vitamin quiz questions to the database
     private void addVitaminQuizQuestions() {
         dbHelper.clearQuizQuestions();
-        // Add the first vitamin quiz question
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
                 "https://www.youtube.com/watch?v=RlEeH5x0mH4", // YouTube video URL
@@ -106,31 +105,62 @@ public class VitaminQuizActivity extends AppCompatActivity {
                 "video"
         );
 
-        // Add the second vitamin quiz question
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
-                "https://www.youtu.be/D4s5P4VqLf0?rel=0", // YouTube video URL
-                "Which vitamin is essential for healthy skin?",
-                "Vitamin A",
-                "Vitamin B6",
-                "Vitamin D",
-                "Vitamin A",// Correct answer
+                "https://i.postimg.cc/ZKsp8STc/Screenshot-2025-04-23-134437.png", // YouTube video URL
+                "Ի՞նչ է կերպարի անունը",
+                "Գվեն",
+                "Կլեպ",
+                "Մեսրոպիկ",
+                "Գվեն" ,
+                "image"
+        );
+
+        dbHelper.addQuizQuestion(
+                "Vitamin Quiz",
+                "https://youtu.be/20DfYWm4cBM", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Սպիտակ արջի հետ բարբա կպնի",
+                "Մեսիի հետ կռվցնենք",
+                "100$ով ծախենք Բանանցի վրա",
+                "100$ով ծախենք Բանանցի վրա",// Correct answer
                 "video"
         );
 
-        // Add the third vitamin quiz question
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
-                "https://www.youtu.be/6FjkW7G4bTg?rel=0", // YouTube video URL
-                "Which vitamin helps in calcium absorption?",
-                "Vitamin D",
-                "Vitamin E",
-                "Vitamin K",
-                "Vitamin D", // Correct answer
+                "https://youtu.be/nkzGupXXWRk", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Թմրանյութեր օգտագործու՞մ եք",
+                "Извините, դուք ով եք",
+                "Դուք ապու՞շ եք",
+                "Դուք ապու՞շ եք", // Correct answer
                 "video"
         );
 
+        dbHelper.addQuizQuestion(
+                "Vitamin Quiz",
+                "https://i.postimg.cc/cHFMDws2/Screenshot-2025-04-20-224753.png", // YouTube video URL
+                "Ո՞ր արտահայտությունն է պատկանում տվյալ հերոսին",
+                "Դուք բնանկարի՞չ եք",
+                "Տուզիկներ",
+                "Այ կովերի փոքրիկ կացարան",
+                "Այ կովերի փոքրիկ կացարան" ,
+                "image"
+        );
 
+
+
+        dbHelper.addQuizQuestion(
+                "Vitamin Quiz",
+                "https://i.postimg.cc/zGpCDThB/Screenshot-2025-04-20-230053.png", // YouTube video URL
+                "Ո՞ր արտահայտությունն է պատկանում տվյալ հերոսին",
+                "Ապերս, խոսքը խոսքի գնդակ չի, որ փոխանցես",
+                "Դոբրի, ընգեր ջան",
+                "Ջոգում ենք՝ Եվրոպա ա, բան ա",
+                "Ապերս, խոսքը խոսքի գնդակ չի, որ փոխանցես", // Correct answer
+                "video"
+        );
 
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
@@ -144,7 +174,17 @@ public class VitaminQuizActivity extends AppCompatActivity {
 
         );
 
-        // Add the second vitamin quiz question
+        dbHelper.addQuizQuestion(
+                "Vitamin Quiz",
+                "https://youtu.be/n-ymY3plDyQ", // YouTube video URL
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Դու մի բզբզա",
+                "Դու ինձ մի աչքով մի նայի",
+                "Վա՞տ ես արա",
+                "Դու մի բզբզա", // Correct answer
+                "video"
+        );
+
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
                 "https://i.postimg.cc/fRMV67gF/Screenshot-2025-04-12-184001.png", // YouTube video URL
@@ -159,13 +199,13 @@ public class VitaminQuizActivity extends AppCompatActivity {
         // Add the third vitamin quiz question
         dbHelper.addQuizQuestion(
                 "Vitamin Quiz",
-                "https://whyp.it/tracks/272649/ayrvum-em-es-chem-karox-ayspes-audiotrimmercom-1?token=xUE7N", // YouTube video URL
-                "Which vitamin helps in calcium absorption?",
-                "Vitamin D",
-                "Vitamin E",
-                "Vitamin K",
-                "Vitamin D" ,
-                "audio"
+                "https://i.postimg.cc/T1H0PmFg/Screenshot-2025-04-20-135807.png", // YouTube video URL
+                "Ու՞մ հոգեհացն է",
+                "Մանյա",
+                "Գալյա",
+                "Մանուշ",
+                "Մանյա" ,
+                "image"
         );
 
 

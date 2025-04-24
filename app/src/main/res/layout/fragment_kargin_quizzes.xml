@@ -62,70 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
 
-    <!-- Kargin multer Quiz Card -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/kargin_multer_quiz"
-        android:layout_width="0dp"
-        android:layout_height="165dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
-        android:backgroundTint="#D2D2DB"
-        app:layout_constraintTop_toBottomOf="@id/kargin_page_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!-- Title TextView -->
-
-            <!-- ImageView moved under the title -->
-            <TextView
-                android:id="@+id/kargin_multer_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="16dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/multer"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/kargin_multer_image"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:layout_marginTop="40dp"
-                android:src="@drawable/kargin_mult"
-                app:layout_constraintTop_toBottomOf="@id/kargin_multer_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-
-            <!-- Button -->
-            <Button
-                android:id="@+id/kargin_multer_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/start_quiz"
-                android:textColor="#FFF"
-                android:backgroundTint="@color/blue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginEnd="8dp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
 
     <!-- Kargin serial Quiz Card -->
     <androidx.cardview.widget.CardView
@@ -137,8 +73,8 @@
         android:layout_marginTop="16dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
-        android:backgroundTint="#434141"
-        app:layout_constraintTop_toBottomOf="@id/kargin_multer_quiz"
+        android:backgroundTint="#D2D2DB"
+        app:layout_constraintTop_toBottomOf="@id/kargin_page_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
