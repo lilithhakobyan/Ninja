@@ -5,6 +5,7 @@
     android:background="#FDF6EF"
     android:padding="16dp">
 
+    <!-- Title -->
     <TextView
         android:id="@+id/leaderboardTitle"
         android:layout_width="wrap_content"
@@ -42,6 +43,7 @@
                 android:layout_gravity="center" />
 
             <TextView
+                android:id="@+id/secondName"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Name"
@@ -50,6 +52,7 @@
                 android:gravity="center" />
 
             <TextView
+                android:id="@+id/secondPoints"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="points"
@@ -76,6 +79,7 @@
                 android:layout_gravity="center" />
 
             <TextView
+                android:id="@+id/firstName"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Name"
@@ -84,6 +88,7 @@
                 android:gravity="center" />
 
             <TextView
+                android:id="@+id/firstPoints"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="points"
@@ -110,6 +115,7 @@
                 android:layout_gravity="center" />
 
             <TextView
+                android:id="@+id/thirdName"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Name"
@@ -118,6 +124,7 @@
                 android:gravity="center" />
 
             <TextView
+                android:id="@+id/thirdPoints"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="points"
