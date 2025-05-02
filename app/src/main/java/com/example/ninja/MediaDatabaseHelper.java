@@ -26,6 +26,8 @@ public class MediaDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CORRECT_ANSWER = "correct_answer";
 
     private static final String TABLE_VITAMIN = "vitamin_quiz";
+    private static final String TABLE_SERIAL= "serial_quiz";
+
 
     // Updated CREATE TABLE without difficulty field and added option2 and option3 columns
     private static final String CREATE_TABLE_MEDIA =
@@ -52,6 +54,18 @@ public class MediaDatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_OPTION3 + " TEXT NOT NULL, " +  // Added option3 column
                     COLUMN_CORRECT_ANSWER + " TEXT NOT NULL" + ");";
 
+    private static final String CREATE_TABLE_SERIAL =
+            "CREATE TABLE " + TABLE_SERIAL + " (" +
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_TITLE + " TEXT NOT NULL, " +
+                    COLUMN_MEDIA_URL + " TEXT NOT NULL, " + // General media URL column
+                    COLUMN_MEDIA_TYPE + " TEXT NOT NULL, " +
+                    COLUMN_QUESTION + " TEXT NOT NULL, " +
+                    COLUMN_OPTION1 + " TEXT NOT NULL, " +
+                    COLUMN_OPTION2 + " TEXT NOT NULL, " +  // Added option2 column
+                    COLUMN_OPTION3 + " TEXT NOT NULL, " +  // Added option3 column
+                    COLUMN_CORRECT_ANSWER + " TEXT NOT NULL" + ");";
+
     public MediaDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -60,12 +74,14 @@ public class MediaDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_MEDIA);
         db.execSQL(CREATE_TABLE_VITAMIN);
+        db.execSQL(CREATE_TABLE_SERIAL);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEDIA);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_VITAMIN);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERIAL);
         onCreate(db);
     }
 

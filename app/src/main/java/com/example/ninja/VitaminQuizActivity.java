@@ -261,6 +261,8 @@ public class VitaminQuizActivity extends AppCompatActivity {
 
         Collections.shuffle(quizList);
 
+        Collections.shuffle(quizList);
+
         for (QuizQuestion question : quizList) {
             String mediaUrl = question.getMediaUrl();
             if (!mediaUrls.contains(mediaUrl)) {

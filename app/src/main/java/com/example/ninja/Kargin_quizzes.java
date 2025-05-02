@@ -21,7 +21,7 @@ public class Kargin_quizzes extends Fragment {
     private TextView usernameTextView;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
-    Button karginHaghordum;
+    Button karginHaghordum, karginSerial;
 
 
     public Kargin_quizzes() {
@@ -36,21 +36,20 @@ public class Kargin_quizzes extends Fragment {
         View view = inflater.inflate(R.layout.fragment_kargin_quizzes, container, false);
 
 
-
-
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         usernameTextView = view.findViewById(R.id.username);
         karginHaghordum = view.findViewById(R.id.kargin_haxordum_button);
-
-
-
-
-
+        karginSerial = view.findViewById(R.id.kargin_serial_button);
 
 
         karginHaghordum.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), QuizActivity.class);
+            startActivity(intent);
+        });
+
+        karginSerial.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), KarginSerialActivity.class);
             startActivity(intent);
         });
 
