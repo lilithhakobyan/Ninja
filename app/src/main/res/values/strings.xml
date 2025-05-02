@@ -64,5 +64,13 @@
     <string name="start_quiz">Սկսել</string>
 
 
+    <!--    edit profile-->
+
+    <string name="change_picture">Change Picture</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="english">English</string>
+    <string name="armenian">Armenian</string>
+    <string name="select_language">Select Language</string>
+    <string name="choose_profile_picture">Choose Profile Picture</string>
 </resources>
 

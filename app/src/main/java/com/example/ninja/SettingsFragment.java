@@ -22,6 +22,8 @@ public class SettingsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private TextView edit_profile;
+
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -64,6 +66,17 @@ public class SettingsFragment extends Fragment {
                 getActivity().finish();
             }
         });
+
+        edit_profile = rootView.findViewById(R.id.edit_profile);
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         return rootView;
     }
