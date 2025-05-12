@@ -93,6 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/score_details"
+        android:gravity="center"
         android:layout_marginTop="16dp">
 
         <Button
@@ -114,13 +115,20 @@
             android:background="@drawable/bg_button_ripple"
             android:layout_centerHorizontal="true" />
 
-        <Button
-            android:id="@+id/btn_leaderboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Աղյուսակ"
-            android:drawableTop="@drawable/baseline_leaderboard_24"
-            android:background="@drawable/bg_button_ripple"
-            android:layout_alignParentEnd="true" />
+<!--        <Button-->
+<!--            android:id="@+id/btn_leaderboard"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Աղյուսակ"-->
+<!--            android:drawableTop="@drawable/baseline_leaderboard_24"-->
+<!--            android:background="@drawable/bg_button_ripple"-->
+<!--            android:layout_alignParentEnd="true" />-->
     </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
 </RelativeLayout>

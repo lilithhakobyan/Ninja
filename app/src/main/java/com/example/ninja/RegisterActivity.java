@@ -187,6 +187,7 @@ public class RegisterActivity extends AppCompatActivity {
         Map<String, Object> userMap = new HashMap<>();
         userMap.put("username", username);
         userMap.put("email", email);
+        userMap.put("score", 0L);
 
         db.collection("users").document(userId).set(userMap)
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "User data successfully saved to Firestore"))

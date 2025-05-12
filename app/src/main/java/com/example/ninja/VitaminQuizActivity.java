@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -397,24 +399,43 @@ public class VitaminQuizActivity extends AppCompatActivity {
             String username = currentUser.getDisplayName();
             String email = currentUser.getEmail();
 
-            Map<String, Object> userData = new HashMap<>();
-            userData.put("score", score);
+            DocumentReference userRef = firestore.collection("users").document(userId);
 
-            if (username != null && !username.isEmpty()) {
-                userData.put("username", username);
-            }
-            if (email != null && !email.isEmpty()) {
-                userData.put("email", email);
-            }
+            firestore.runTransaction(transaction -> {
+                DocumentSnapshot snapshot = transaction.get(userRef);
 
-            firestore.collection("users")
-                    .document(userId)
-                    .set(userData, SetOptions.merge())
-                    .addOnSuccessListener(aVoid -> Log.d(TAG, "Score updated successfully"))
-                    .addOnFailureListener(e -> Log.w(TAG, "Error updating score", e));
+                long currentScore = snapshot.exists() && snapshot.contains("score")
+                        ? snapshot.getLong("score")
+                        : 0;
+
+                long newScore = currentScore + score;
+
+                Map<String, Object> updates = new HashMap<>();
+                updates.put("score", newScore);
+
+                // Optional: Track quiz-specific scores
+                updates.put("quizScore_vitamin", score); // For vitamin quiz
+
+                if (username != null && !username.isEmpty() &&
+                        (!snapshot.exists() || !snapshot.contains("username"))) {
+                    updates.put("username", username);
+                }
+                if (email != null && !email.isEmpty() &&
+                        (!snapshot.exists() || !snapshot.contains("email"))) {
+                    updates.put("email", email);
+                }
+
+                transaction.set(userRef, updates, SetOptions.merge());
+                return null;
+            }).addOnSuccessListener(aVoid -> {
+                Log.d(TAG, "Score updated successfully");
+            }).addOnFailureListener(e -> {
+                Log.w(TAG, "Error updating score", e);
+                runOnUiThread(() ->
+                        Toast.makeText(this, "Failed to save score", Toast.LENGTH_SHORT).show());
+            });
         }
     }
-
     @Override
     protected void onPause() {
         super.onPause();
