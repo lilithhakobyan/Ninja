@@ -32,8 +32,8 @@
     <!-- Profile Picture -->
     <ImageView
         android:id="@+id/profileImageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:layout_marginTop="16dp"
@@ -102,31 +102,31 @@
         android:layout_marginTop="8dp"/>
 
     <!-- Language option (styled row) -->
-    <RelativeLayout
-        android:id="@+id/optionLanguage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvEmail"
-        android:layout_marginTop="24dp"
-        android:padding="12dp">
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/optionLanguage"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tvEmail"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:padding="12dp">-->
 
-        <ImageView
-            android:id="@+id/imgLanguage"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_language" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgLanguage"-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/ic_language" />-->
 
-        <TextView
-            android:id="@+id/tvLanguageLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Language"
-            android:textSize="16sp"
-            android:layout_toEndOf="@id/imgLanguage"
-            android:layout_marginStart="12dp"
-            android:layout_centerVertical="true"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tvLanguageLabel"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Language"-->
+<!--            android:textSize="16sp"-->
+<!--            android:layout_toEndOf="@id/imgLanguage"-->
+<!--            android:layout_marginStart="12dp"-->
+<!--            android:layout_centerVertical="true"/>-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
 
     <!-- Dark Mode option (styled row) -->
 <!--    <RelativeLayout-->
