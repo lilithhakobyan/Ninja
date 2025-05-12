@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,21 +20,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private ImageView profileImageView;
     private TextView btnChangePicture;
     private TextView txtEmail;
     private TextView txtLanguage;
+    private List<ProfilePicture> profilePictures = new ArrayList<>();
+    private MediaDatabaseHelper dbHelper;
 
     private FirebaseUser currentUser;
     private DatabaseReference userRef;
-    private int selectedProfileIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        // Initialize database helper
+        dbHelper = new MediaDatabaseHelper(this);
 
         profileImageView = findViewById(R.id.profileImageView);
         btnChangePicture = findViewById(R.id.btnChangePicture);
@@ -41,152 +49,124 @@ public class ProfileActivity extends AppCompatActivity {
         txtLanguage = findViewById(R.id.tvLanguageLabel);
         ImageView backBtn = findViewById(R.id.btnBack);
 
-        // Back button to finish activity
         backBtn.setOnClickListener(v -> finish());
 
-        loadProfilePhoto();  // Load the profile picture when activity starts
-
-        profileImageView.setOnClickListener(v -> showImageSelectionDialog());  // Open dialog to change profile image
+        // Load profile pictures from SQLite
+        loadProfilePicturesFromDatabase();
+        dbHelper = new MediaDatabaseHelper(this);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             String userId = currentUser.getUid();
             userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
 
-            // Show email or username
             if (currentUser.getEmail() != null) {
                 txtEmail.setText(currentUser.getEmail());
             } else {
                 txtEmail.setText("Username: Unknown");
             }
 
-            // Load language and profile picture index from database
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            // Load saved profile picture from Firebase
+            userRef.child("profilePhoto").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     if (snapshot.exists()) {
-                        if (snapshot.hasChild("profileImageIndex")) {
-                            Long index = snapshot.child("profileImageIndex").getValue(Long.class);
-                            if (index != null) {
-                                selectedProfileIndex = index.intValue();
-                                int[] profilePics = {
-                                        R.drawable.profile1, R.drawable.profile2
-                                };
-                                if (selectedProfileIndex >= 0 && selectedProfileIndex < profilePics.length) {
-                                    profileImageView.setImageResource(profilePics[selectedProfileIndex]);
-                                }
-                            }
-                        }
-
-                        if (snapshot.hasChild("language")) {
-                            String lang = snapshot.child("language").getValue(String.class);
-                            if (lang != null) {
-                                txtLanguage.setText("Language: " + lang);
-                            }
+                        String pictureId = snapshot.getValue(String.class);
+                        if (pictureId != null) {
+                            loadProfilePicture(pictureId);
                         }
                     }
                 }
 
                 @Override
                 public void onCancelled(DatabaseError error) {
-                    Toast.makeText(ProfileActivity.this, "Failed to load user data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, "Failed to load profile picture", Toast.LENGTH_SHORT).show();
                 }
             });
         }
 
-        btnChangePicture.setOnClickListener(v -> showPictureSelectionDialog());  // Open dialog to select a picture
-    }
+        btnChangePicture.setOnClickListener(v -> showPictureSelectionDialog());
 
-    // Show the image selection dialog when the user taps on the profile picture
-    private void showImageSelectionDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
-        builder.setTitle("Select Profile Picture")
-                .setItems(new CharSequence[]{"Default", "Profile 1", "Profile 2"},
-                        (dialog, which) -> {
-                            switch (which) {
-                                case 0:
-                                    saveProfilePhoto("default");
-                                    break;
-                                case 1:
-                                    saveProfilePhoto("profile1");
-                                    break;
-                                case 2:
-                                    saveProfilePhoto("profile2");
-                                    break;
-                            }
-                        })
-                .show();
-    }
+        // For changing profile picture
+        profileImageView.setOnClickListener(v -> showPictureSelectionDialog());    }
 
-    // Load the saved profile picture from Firebase
-    private void loadProfilePhoto() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String uid = user.getUid(); // Get the UID of the logged-in user
-            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
-            dbRef.child("profilePhoto").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    String photoId = dataSnapshot.getValue(String.class); // Get the photo ID
-                    if (photoId != null) {
-                        setProfileImage(photoId); // Set the image based on saved data
-                    }
-                }
+//    private void loadProfilePicturesFromDatabase() {
+//        profilePictures = dbHelper.getAllProfilePictures();
+//        // You might want to add some default pictures if the database is empty
+//        if (profilePictures.isEmpty()) {
+//            // Add some default pictures
+//            dbHelper.addProfilePicture("default", "https://example.com/default.jpg");
+//            dbHelper.addProfilePicture("pic1", "https://example.com/profile1.jpg");
+//            dbHelper.addProfilePicture("pic2", "https://example.com/profile2.jpg");
+//            profilePictures = dbHelper.getAllProfilePictures();
+//        }
+//    }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    // Handle any errors (e.g., network issues)
-                }
-            });
+    private void loadProfilePicturesFromDatabase() {
+        profilePictures = dbHelper.getAllProfilePictures();
+
+        // Add default pictures if database is empty
+        if (profilePictures.isEmpty()) {
+            dbHelper.addProfilePicture("Monika", "https://i.postimg.cc/bwM6mFJR/image.png");
+            dbHelper.addProfilePicture("Vardan", "https://i.postimg.cc/8PP0yv1t/image.png");
+            dbHelper.addProfilePicture("Adzik", "https://i.postimg.cc/jdsGG9h6/image.png");
+            profilePictures = dbHelper.getAllProfilePictures();
         }
     }
 
-    // Save the profile picture reference in Firebase
-    private void saveProfilePhoto(String selectedPhoto) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String uid = user.getUid(); // Get the current user's UID
-            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
-            dbRef.child("profilePhoto").setValue(selectedPhoto); // Save the selected photo reference
-        }
-    }
-
-    // Set the profile image based on the photo ID
-    private void setProfileImage(String photoId) {
-        switch (photoId) {
-            case "default":
-                profileImageView.setImageResource(R.drawable.profile_default);  // Set the default image
-                break;
-            case "profile1":
-                profileImageView.setImageResource(R.drawable.profile1);  // Set profile image 1
-                break;
-            case "profile2":
-                profileImageView.setImageResource(R.drawable.profile2);  // Set profile image 2
-                break;
-            // Add more cases if you have more profile images
-        }
-    }
-
-    // Show a dialog to select a profile picture from predefined images
-    private void showPictureSelectionDialog() {
-        int[] profilePics = {
-                R.drawable.profile1, R.drawable.profile2
-        };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Profile Picture");
-        builder.setItems(new CharSequence[]{
-                "Picture 1", "Picture 2"
-        }, (dialog, which) -> {
-            selectedProfileIndex = which;
-            profileImageView.setImageResource(profilePics[which]);
-
-            if (userRef != null) {
-                userRef.child("profileImageIndex").setValue(which)
-                        .addOnSuccessListener(aVoid -> Toast.makeText(ProfileActivity.this, "Profile picture updated!", Toast.LENGTH_SHORT).show())
-                        .addOnFailureListener(e -> Toast.makeText(ProfileActivity.this, "Failed to update picture.", Toast.LENGTH_SHORT).show());
+    private void loadProfilePicture(String pictureId) {
+        // Find the picture in our list
+        for (ProfilePicture picture : profilePictures) {
+            if (picture.getId().equals(pictureId)) {
+                // Use Glide or Picasso to load the image from URL
+                Glide.with(this)
+                        .load(picture.getUrl())
+                        .placeholder(R.drawable.profile_default)
+                        .error(R.drawable.profile_default)
+                        .into(profileImageView);
+                return;
             }
-        });
-        builder.show();
+        }
+        // If not found, load default
+        profileImageView.setImageResource(R.drawable.profile_default);
+    }
+
+
+    // The dialog method
+    private void showPictureSelectionDialog() {
+        if (profilePictures.isEmpty()) {
+            Toast.makeText(this, "No pictures available", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        CharSequence[] items = new CharSequence[profilePictures.size()];
+        for (int i = 0; i < profilePictures.size(); i++) {
+            items[i] = profilePictures.get(i).getId(); // Or label it nicely
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("Select Profile Picture")
+                .setItems(items, (dialog, which) -> {
+                    ProfilePicture selected = profilePictures.get(which);
+
+                    // 1. Save selected picture ID to Firebase
+                    if (userRef != null) {
+                        userRef.child("profilePhoto").setValue(selected.getId());
+                    }
+
+                    // 2. Load the image into ImageView
+                    Glide.with(ProfileActivity.this)
+                            .load(selected.getUrl())
+                            .placeholder(R.drawable.profile_default)
+                            .error(R.drawable.profile_default)
+                            .into(profileImageView);
+
+                    Toast.makeText(this, "Profile picture updated", Toast.LENGTH_SHORT).show();
+                }).show();
+    }
+    @Override
+    protected void onDestroy() {
+        dbHelper.close();
+        super.onDestroy();
     }
 }
