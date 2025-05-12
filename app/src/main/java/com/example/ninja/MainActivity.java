@@ -43,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
         usernameTextView = findViewById(R.id.username);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+
+        // Get the profile ImageView
+        ImageView profileImageView = findViewById(R.id.profile_picture); // Make sure this ID matches your XML
+
+        loadUserData();
+        loadProfilePicture(profileImageView); // Add this line to load the profile picture
+
         loadUserData();
 
         karginButton = findViewById(R.id.kargin_card_button);
@@ -73,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        ImageView profileImageView = findViewById(R.id.profileImageView);
         SharedPreferences prefs = getSharedPreferences("profile", MODE_PRIVATE);
         String imagePath = prefs.getString("profile_image_path", null);
 
@@ -88,6 +94,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private void loadProfilePicture(ImageView profileImageView) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            db.collection("users").document(user.getUid())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String profilePhotoUrl = documentSnapshot.getString("profilePhotoUrl");
+                            if (profilePhotoUrl != null && !profilePhotoUrl.isEmpty()) {
+                                Glide.with(this)
+                                        .load(profilePhotoUrl)
+                                        .circleCrop()
+                                        .placeholder(R.drawable.baseline_person_24) // Your default profile icon
+                                        .error(R.drawable.baseline_person_24) // Fallback if loading fails
+                                        .into(profileImageView);
+                            }
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e("MainActivity", "Error loading profile picture", e);
+                    });
+        }
     }
 
     private void loadUserData() {
