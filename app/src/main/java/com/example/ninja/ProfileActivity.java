@@ -30,7 +30,7 @@
         private ImageView profileImageView;
         private TextView btnChangePicture;
         private TextView txtEmail;
-        private TextView txtLanguage;
+        private TextView txtUsername;
         private List<ProfilePicture> profilePictures = new ArrayList<>();
         private MediaDatabaseHelper dbHelper;
 
@@ -42,19 +42,18 @@
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_profile);
 
-            // Initialize database helper
             dbHelper = new MediaDatabaseHelper(this);
 
             profileImageView = findViewById(R.id.profileImageView);
             btnChangePicture = findViewById(R.id.btnChangePicture);
             txtEmail = findViewById(R.id.tvEmail);
+            txtUsername = findViewById(R.id.tvUsername);
             ImageView backBtn = findViewById(R.id.btnBack);
             FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
 
             backBtn.setOnClickListener(v -> finish());
 
-            // Load profile pictures from SQLite
             loadProfilePicturesFromDatabase();
 
             currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -85,12 +84,14 @@
                     }
                 });
                 Log.d("ProfilePictures", "Loaded: " + profilePictures.size());
-
+//////////////////////////////////////
                 firestore.collection("users").document(currentUser.getUid())
                         .get()
                         .addOnSuccessListener(documentSnapshot -> {
                             if (documentSnapshot.exists()) {
                                 String url = documentSnapshot.getString("profilePhotoUrl");
+                                String username = documentSnapshot.getString("username");
+
                                 if (url != null && !url.isEmpty()) {
                                     Glide.with(ProfileActivity.this)
                                             .load(url)
@@ -98,9 +99,15 @@
                                             .error(R.drawable.profile_default)
                                             .into(profileImageView);
                                 }
+
+                                if (username != null && !username.isEmpty()) {
+                                    txtUsername.setText(username);
+                                } else {
+                                    txtUsername.setText("No username");
+                                }
                             }
                         })
-                        .addOnFailureListener(e -> Log.e("Firestore", "Failed to load URL", e));
+                        .addOnFailureListener(e -> Log.e("Firestore", "Failed to load profile info", e));
 
 
             }
@@ -111,7 +118,6 @@
         private void loadProfilePicturesFromDatabase() {
             profilePictures = dbHelper.getAllProfilePictures();
 
-            // Add default pictures if database is empty
             if (profilePictures.isEmpty()) {
                 dbHelper.addProfilePicture("Monika", "https://i.postimg.cc/bwM6mFJR/image.png");
                 dbHelper.addProfilePicture("Vardan", "https://i.postimg.cc/8PP0yv1t/image.png");
@@ -152,12 +158,10 @@
                     .setItems(items, (dialog, which) -> {
                         ProfilePicture selected = profilePictures.get(which);
 
-                        // 1. Save selected picture ID to Realtime Database
                         if (userRef != null) {
                             userRef.child("profilePhoto").setValue(selected.getId());
                         }
 
-                        // 2. Save selected picture URL to Firestore
                         if (currentUser != null) {
                             String userId = currentUser.getUid();
                             FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -169,7 +173,6 @@
                                             Log.e("Firestore", "Error saving profile picture URL", e));
                         }
 
-                        // 3. Load the image into ImageView
                         Glide.with(ProfileActivity.this)
                                 .load(selected.getUrl())
                                 .placeholder(R.drawable.profile_default)
