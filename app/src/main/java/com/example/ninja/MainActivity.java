@@ -58,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         karginButton.setOnClickListener(v -> openFragment(new Kargin_quizzes()));
         vitaminButton.setOnClickListener(v -> openActivity());
 
+        profileImageView.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Profile.class);
+            startActivity(intent);
+        });
+
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
@@ -179,6 +184,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.d("MainActivity", "onStop called");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ImageView profileImageView = findViewById(R.id.profile_picture);
+        loadProfilePicture(profileImageView);
     }
 
 }
