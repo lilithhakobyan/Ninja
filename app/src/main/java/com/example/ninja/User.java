@@ -3,14 +3,19 @@ package com.example.ninja;
 public class User {
     private String username;
     private long score;
+    private String profilePhotoUrl;
 
-    // Required for Firebase deserialization
-    public User() {
-    }
-
-    public User(String username, long score) {
+    // Constructor
+    public User(String username, long score, String profilePhotoUrl) {
         this.username = username;
         this.score = score;
+        this.profilePhotoUrl = (profilePhotoUrl != null && !profilePhotoUrl.isEmpty()) ?
+                profilePhotoUrl : null;
+    }
+
+    // Getter
+    public String getProfilePhotoUrl() {
+        return profilePhotoUrl;
     }
 
     public String getUsername() {
@@ -19,14 +24,5 @@ public class User {
 
     public long getScore() {
         return score;
-    }
-
-    // Optional: setters, only if you want to update values after creation
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setScore(long score) {
-        this.score = score;
     }
 }
