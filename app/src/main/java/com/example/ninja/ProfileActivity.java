@@ -1,6 +1,7 @@
     package com.example.ninja;
 
     import android.content.DialogInterface;
+    import android.database.sqlite.SQLiteDatabase;
     import android.os.Bundle;
     import android.util.Log;
     import android.view.View;
@@ -13,6 +14,7 @@
 
     import com.bumptech.glide.Glide;
     import com.google.android.material.textview.MaterialTextView;
+    import com.google.firebase.BuildConfig;
     import com.google.firebase.auth.FirebaseAuth;
     import com.google.firebase.auth.FirebaseUser;
     import com.google.firebase.database.DataSnapshot;
@@ -22,6 +24,7 @@
     import com.google.firebase.database.ValueEventListener;
     import com.google.firebase.firestore.FirebaseFirestore;
 
+    import java.io.Console;
     import java.util.ArrayList;
     import java.util.List;
 
@@ -56,6 +59,12 @@
 
             loadProfilePicturesFromDatabase();
 
+            if (BuildConfig.DEBUG) { // or use a button for testing
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                db.delete("profile_pictures", null, null);
+            }
+
+
             currentUser = FirebaseAuth.getInstance().getCurrentUser();
             if (currentUser != null) {
                 String userId = currentUser.getUid();
@@ -80,11 +89,10 @@
 
                     @Override
                     public void onCancelled(DatabaseError error) {
-                        Toast.makeText(ProfileActivity.this, "Failed to load profile picture", Toast.LENGTH_SHORT).show();
                     }
                 });
+
                 Log.d("ProfilePictures", "Loaded: " + profilePictures.size());
-//////////////////////////////////////
                 firestore.collection("users").document(currentUser.getUid())
                         .get()
                         .addOnSuccessListener(documentSnapshot -> {
@@ -97,6 +105,7 @@
                                             .load(url)
                                             .placeholder(R.drawable.profile_default)
                                             .error(R.drawable.profile_default)
+                                            .circleCrop()
                                             .into(profileImageView);
                                 }
 
@@ -106,27 +115,28 @@
                                     txtUsername.setText("No username");
                                 }
                             }
-                        })
-                        .addOnFailureListener(e -> Log.e("Firestore", "Failed to load profile info", e));
-
-
+                        });
             }
 
             btnChangePicture.setOnClickListener(v -> showPictureSelectionDialog());
 
             profileImageView.setOnClickListener(v -> showPictureSelectionDialog());    }
-        private void loadProfilePicturesFromDatabase() {
-            profilePictures = dbHelper.getAllProfilePictures();
 
-            if (profilePictures.isEmpty()) {
-                dbHelper.addProfilePicture("Monika", "https://i.postimg.cc/bwM6mFJR/image.png");
-                dbHelper.addProfilePicture("Vardan", "https://i.postimg.cc/8PP0yv1t/image.png");
-                dbHelper.addProfilePicture("Adzik", "https://i.postimg.cc/jdsGG9h6/image.png");
-                dbHelper.addProfilePicture("Adzik2", "https://i.postimg.cc/Px6vM0fX/image.png");
-                dbHelper.addProfilePicture("Seda", "https://i.postimg.cc/JhW3FwNM/image.png");
-                profilePictures = dbHelper.getAllProfilePictures();
-            }
+
+
+        private void loadProfilePicturesFromDatabase() {
+            dbHelper.addProfilePictureIfNotExists("Monika", "https://i.postimg.cc/bwM6mFJR/image.png");
+            dbHelper.addProfilePictureIfNotExists("Vardan", "https://i.postimg.cc/8PP0yv1t/image.png");
+            dbHelper.addProfilePictureIfNotExists("Adzik", "https://i.postimg.cc/jdsGG9h6/image.png");
+            dbHelper.addProfilePictureIfNotExists("Adzik2", "https://i.postimg.cc/Px6vM0fX/image.png");
+            dbHelper.addProfilePictureIfNotExists("Seda", "https://i.postimg.cc/JhW3FwNM/image.png");
+            dbHelper.addProfilePictureIfNotExists("Jemma", "https://i.postimg.cc/1RYGQVGW/image.png");
+            dbHelper.addProfilePictureIfNotExists("Gven", "https://i.postimg.cc/CMW48fRR/image.png");
+
+            // Reload the list
+            profilePictures = dbHelper.getAllProfilePictures();
         }
+
 
         private void loadProfilePicture(String pictureId) {
             for (ProfilePicture picture : profilePictures) {
@@ -135,6 +145,7 @@
                             .load(picture.getUrl())
                             .placeholder(R.drawable.profile_default)
                             .error(R.drawable.profile_default)
+                            .circleCrop()
                             .into(profileImageView);
                     return;
                 }
@@ -177,9 +188,14 @@
                                 .load(selected.getUrl())
                                 .placeholder(R.drawable.profile_default)
                                 .error(R.drawable.profile_default)
+                                .circleCrop()
                                 .into(profileImageView);
 
                         Toast.makeText(this, "Profile picture updated", Toast.LENGTH_SHORT).show();
                     }).show();
+
+
         }
+
+
     }

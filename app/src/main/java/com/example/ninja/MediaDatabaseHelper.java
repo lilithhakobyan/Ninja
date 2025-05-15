@@ -148,7 +148,6 @@ public class MediaDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Profile picture methods
     public boolean addProfilePicture(String pictureId, String pictureUrl) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -160,6 +159,8 @@ public class MediaDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return result != -1;
     }
+
+
 
     public List<ProfilePicture> getAllProfilePictures() {
         List<ProfilePicture> pictures = new ArrayList<>();
@@ -179,4 +180,17 @@ public class MediaDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return pictures;
     }
+
+    public void addProfilePictureIfNotExists(String pictureId, String pictureUrl) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM profile_pictures WHERE picture_id = ?", new String[]{pictureId});
+        boolean exists = cursor.moveToFirst();
+        cursor.close();
+
+        if (!exists) {
+            addProfilePicture(pictureId, pictureUrl);
+        }
+    }
+
+
 }
