@@ -165,7 +165,7 @@
             }
 
             new AlertDialog.Builder(this)
-                    .setTitle("Select Profile Picture")
+                    .setTitle("Ընտրել նկար")
                     .setItems(items, (dialog, which) -> {
                         ProfilePicture selected = profilePictures.get(which);
 

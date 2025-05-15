@@ -315,7 +315,7 @@ public class VitaminQuizActivity extends AppCompatActivity {
     private void loadQuestion(int index) {
         QuizQuestion currentQuestion = selectedQuestions.get(index);
 
-        quizTitle.setText("Question " + (index + 1) + " of " + MAX_QUESTIONS);
+        quizTitle.setText("Հարց  " + (index + 1));
         questionText.setText(currentQuestion.getQuestion());
         ans1.setText(currentQuestion.getOption1());
         ans2.setText(currentQuestion.getOption2());
