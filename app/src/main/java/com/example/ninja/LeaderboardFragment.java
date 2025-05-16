@@ -94,6 +94,11 @@ public class LeaderboardFragment extends Fragment {
         }
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         fetchScores();
     }
 
@@ -170,7 +175,7 @@ public class LeaderboardFragment extends Fragment {
                         .load(photoUrl)
                         .placeholder(R.drawable.baseline_person)
                         .transform(new CircleCrop())
-                        .into(profImage3);  // Fixed: was profImage1
+                        .into(profImage3);
             } else {
                 profImage3.setImageResource(R.drawable.baseline_person);
             }
