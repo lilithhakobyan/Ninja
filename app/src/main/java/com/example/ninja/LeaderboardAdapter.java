@@ -147,7 +147,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         User user = userList.get(position);
         holder.rankText.setText(String.valueOf(position + 4));
         holder.nameText.setText(user.getUsername());
-        holder.scoreText.setText(user.getScore() + "միավոր");
+        holder.scoreText.setText(user.getScore() + " միավոր");
 
         String photoUrl = user.getProfilePhotoUrl();
         if (photoUrl != null && !photoUrl.isEmpty()) {
