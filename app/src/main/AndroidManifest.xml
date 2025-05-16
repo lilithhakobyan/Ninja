@@ -67,6 +67,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+
+        <activity android:name=".Profile" />
+
     </application>
 
 </manifest>
