@@ -1,5 +1,6 @@
 package com.example.ninja;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ public class DiscoverFragment extends Fragment {
 
 
 
-    Button gol, kartoshka,dzmeruk,tupoy,bordo;
+    Button gol, kartoshka,dzmeruk,tupoy,bordo,AzatGoti,AnkochHyur,Bodybuilder,KisabacDebatner,Nkarich,Oligarkh,AramMP3, Avtovtar;
 
     public DiscoverFragment() {
         // Required empty public constructor
@@ -61,6 +62,7 @@ public class DiscoverFragment extends Fragment {
         }
     }
 
+    @SuppressLint({"CutPasteId", "MissingInflatedId"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,6 +77,14 @@ public class DiscoverFragment extends Fragment {
         dzmeruk = view.findViewById(R.id.yt_dzmeruk);
         tupoy = view.findViewById(R.id.yt_tupoy);
         bordo = view.findViewById(R.id.yt_bordo);
+        AzatGoti = view.findViewById(R.id.yt_azat_goti);
+        AnkochHyur = view.findViewById(R.id.yt_ankoch_hyur);
+        Bodybuilder = view.findViewById(R.id.yt_bodybuilder);
+        KisabacDebatner = view.findViewById(R.id.yt_kisabac_debatner);
+        Nkarich = view.findViewById(R.id.yt_nkarich);
+        Oligarkh = view.findViewById(R.id.yt_oligarkh);
+        AramMP3 = view.findViewById(R.id.yt_arammp3);
+        Avtovtar = view.findViewById(R.id.yt_avtovtar);
 
         usernameTextView = view.findViewById(R.id.username);
         profileImageView = view.findViewById(R.id.profile_picture); 
@@ -125,9 +135,80 @@ public class DiscoverFragment extends Fragment {
             }
         });
 
+        AzatGoti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=FunYRHM9gSo";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        AnkochHyur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=7wX5kpqd__8";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        Bodybuilder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=uPhe18RgSwg&t=301s";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        KisabacDebatner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=rcHuvKCl3dw&t=162s";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        Nkarich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=vERdMdDiGw8";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        Oligarkh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=w0QsGeqGsVg";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        AramMP3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=PoiyM-GimNU";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        Avtovtar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=b9Z-A6g8jZU";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
         loadUserData();
         loadProfilePicture();
-
 
         return view;
 
