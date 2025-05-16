@@ -3,6 +3,7 @@ package com.example.ninja;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import android.content.Intent;
 public class ScorePage extends AppCompatActivity {
 
     TextView total_questions, scoreText, completion, correct, wrong;
-    Button homeButton, leaderboardBtn, again;
+    Button homeButton, again;
     CircularProgressIndicator progressCircle;
 
     @Override
@@ -24,7 +25,6 @@ public class ScorePage extends AppCompatActivity {
         // Initialize your UI elements
         scoreText = findViewById(R.id.scoreText);
         homeButton = findViewById(R.id.btn_home);
-        leaderboardBtn = findViewById(R.id.btn_leaderboard);
         again = findViewById(R.id.btn_play_again);
         completion = findViewById(R.id.completion);
         total_questions = findViewById(R.id.total_questions);
@@ -65,12 +65,6 @@ public class ScorePage extends AppCompatActivity {
 
         homeButton.setOnClickListener(v -> {
             Intent intent = new Intent(ScorePage.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        });
-
-        leaderboardBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(ScorePage.this, LoginActivity.class);
             startActivity(intent);
             finish();
         });

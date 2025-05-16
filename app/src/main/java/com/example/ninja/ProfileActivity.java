@@ -1,160 +1,201 @@
-package com.example.ninja;
+    package com.example.ninja;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+    import android.content.DialogInterface;
+    import android.database.sqlite.SQLiteDatabase;
+    import android.os.Bundle;
+    import android.util.Log;
+    import android.view.View;
+    import android.widget.ImageView;
+    import android.widget.TextView;
+    import android.widget.Toast;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+    import androidx.appcompat.app.AlertDialog;
+    import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.ninja.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+    import com.bumptech.glide.Glide;
+    import com.google.android.material.textview.MaterialTextView;
+    import com.google.firebase.BuildConfig;
+    import com.google.firebase.auth.FirebaseAuth;
+    import com.google.firebase.auth.FirebaseUser;
+    import com.google.firebase.database.DataSnapshot;
+    import com.google.firebase.database.DatabaseError;
+    import com.google.firebase.database.DatabaseReference;
+    import com.google.firebase.database.FirebaseDatabase;
+    import com.google.firebase.database.ValueEventListener;
+    import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.Locale;
+    import java.io.Console;
+    import java.util.ArrayList;
+    import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
+    public class ProfileActivity extends AppCompatActivity {
 
-    private TextView tvUsername, tvEmail, tvLanguageLabel;
-    private ImageView imgProfile;
-    private FirebaseAuth mAuth;
-    private FirebaseFirestore db;
-    private String currentLanguage = "en"; // Default to English
+        private ImageView profileImageView;
+        private TextView btnChangePicture;
+        private TextView txtEmail;
+        private TextView txtUsername;
+        private List<ProfilePicture> profilePictures = new ArrayList<>();
+        private MediaDatabaseHelper dbHelper;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        private FirebaseUser currentUser;
+        private DatabaseReference userRef;
 
-        // Initialize views
-        tvUsername = findViewById(R.id.tvUsername);
-        tvEmail = findViewById(R.id.tvEmail);
-        tvLanguageLabel = findViewById(R.id.tvLanguageLabel);
-        imgProfile = findViewById(R.id.imgProfile);
-        ImageButton btnBack = findViewById(R.id.btnBack);
-        TextView btnChangePicture = findViewById(R.id.btnChangePicture);
-        View optionLanguage = findViewById(R.id.optionLanguage);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_profile);
 
-        // Initialize Firebase instances
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+            dbHelper = new MediaDatabaseHelper(this);
 
-        // Back button click
-        btnBack.setOnClickListener(v -> finish());
+            profileImageView = findViewById(R.id.profileImageView);
+            btnChangePicture = findViewById(R.id.btnChangePicture);
+            txtEmail = findViewById(R.id.tvEmail);
+            txtUsername = findViewById(R.id.tvUsername);
+            ImageView backBtn = findViewById(R.id.btnBack);
+            FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-        // Change picture click
-        btnChangePicture.setOnClickListener(v -> showImageSelectionDialog());
 
-        // Language option click
-        optionLanguage.setOnClickListener(v -> showLanguageSelectionDialog());
+            backBtn.setOnClickListener(v -> finish());
 
-        // Get current user
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+            loadProfilePicturesFromDatabase();
 
-        if (currentUser != null) {
-            // Set email from Firebase Auth
-            tvEmail.setText(currentUser.getEmail());
+            if (BuildConfig.DEBUG) { // or use a button for testing
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                db.delete("profile_pictures", null, null);
+            }
 
-            // Get username from Firestore
-            DocumentReference userRef = db.collection("users").document(currentUser.getUid());
-            userRef.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        String username = document.getString("username");
-                        if (username != null) {
-                            tvUsername.setText(username);
+
+            currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null) {
+                String userId = currentUser.getUid();
+                userRef = FirebaseDatabase.getInstance().getReference("users").child(userId);
+
+                if (currentUser.getEmail() != null) {
+                    txtEmail.setText(currentUser.getEmail());
+                } else {
+                    txtEmail.setText("Username: Unknown");
+                }
+
+                userRef.child("profilePhoto").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            String pictureId = snapshot.getValue(String.class);
+                            if (pictureId != null) {
+                                loadProfilePicture(pictureId);
+                            }
                         }
                     }
-                }
-            });
-        }
 
-        // Set initial language
-        updateLanguageText();
-    }
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                    }
+                });
 
-    private void showImageSelectionDialog() {
-        // Create an array of drawable resource IDs for profile pictures
-        Integer[] profilePics = {
-                R.drawable.profile1,
-//                R.drawable.profile2,
-//                R.drawable.profile3,
-//                R.drawable.profile4
-        };
+                Log.d("ProfilePictures", "Loaded: " + profilePictures.size());
+                firestore.collection("users").document(currentUser.getUid())
+                        .get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            if (documentSnapshot.exists()) {
+                                String url = documentSnapshot.getString("profilePhotoUrl");
+                                String username = documentSnapshot.getString("username");
 
-        // Convert to CharSequence array for the dialog
-        CharSequence[] items = new CharSequence[profilePics.length];
-        for (int i = 0; i < profilePics.length; i++) {
-            items[i] = "Profile Picture " + (i + 1);
-        }
+                                if (url != null && !url.isEmpty()) {
+                                    Glide.with(ProfileActivity.this)
+                                            .load(url)
+                                            .placeholder(R.drawable.profile_default)
+                                            .error(R.drawable.profile_default)
+                                            .circleCrop()
+                                            .into(profileImageView);
+                                }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose Profile Picture");
-        builder.setItems(items, (dialog, which) -> {
-            // Set the selected image to the ImageView
-            imgProfile.setImageResource(profilePics[which]);
-            Toast.makeText(ProfileActivity.this, "Profile picture changed", Toast.LENGTH_SHORT).show();
-        });
-        builder.show();
-    }
-
-    private void showLanguageSelectionDialog() {
-        ArrayList<LanguageItem> languageList = new ArrayList<>();
-        languageList.add(new LanguageItem("English", R.drawable.flag_uk));
-        languageList.add(new LanguageItem("Armenian", R.drawable.flag_armenia));
-
-        LanguageAdapter adapter = new LanguageAdapter(this, languageList);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Language");
-        builder.setAdapter(adapter, (dialog, which) -> {
-            String selectedLanguage = languageList.get(which).getName();
-            if (selectedLanguage.equals("English")) {
-                currentLanguage = "en";
-            } else if (selectedLanguage.equals("Armenian")) {
-                currentLanguage = "hy";
+                                if (username != null && !username.isEmpty()) {
+                                    txtUsername.setText(username);
+                                } else {
+                                    txtUsername.setText("No username");
+                                }
+                            }
+                        });
             }
-            setLocale(currentLanguage);
-            updateLanguageText();
-        });
-        builder.show();
-    }
 
-    private void setLocale(String lang) {
-        Locale locale = new Locale(lang);
-        Locale.setDefault(locale);
-        Resources res = getResources();
-        Configuration config = new Configuration(res.getConfiguration());
-        config.setLocale(locale);
-        res.updateConfiguration(config, res.getDisplayMetrics());
+            btnChangePicture.setOnClickListener(v -> showPictureSelectionDialog());
 
-        // Restart activity to apply language changes
-        Intent refresh = new Intent(this, ProfileActivity.class);
-        startActivity(refresh);
-        finish();
-    }
+            profileImageView.setOnClickListener(v -> showPictureSelectionDialog());    }
 
-    private void updateLanguageText() {
-        if (currentLanguage.equals("en")) {
-            tvLanguageLabel.setText("English");
-        } else if (currentLanguage.equals("hy")) {
-            tvLanguageLabel.setText("Armenian");
+
+
+        private void loadProfilePicturesFromDatabase() {
+            dbHelper.addProfilePictureIfNotExists("Monika", "https://i.postimg.cc/bwM6mFJR/image.png");
+            dbHelper.addProfilePictureIfNotExists("Vardan", "https://i.postimg.cc/8PP0yv1t/image.png");
+            dbHelper.addProfilePictureIfNotExists("Adzik", "https://i.postimg.cc/jdsGG9h6/image.png");
+            dbHelper.addProfilePictureIfNotExists("Adzik2", "https://i.postimg.cc/Px6vM0fX/image.png");
+            dbHelper.addProfilePictureIfNotExists("Seda", "https://i.postimg.cc/JhW3FwNM/image.png");
+            dbHelper.addProfilePictureIfNotExists("Jemma", "https://i.postimg.cc/1RYGQVGW/image.png");
+            dbHelper.addProfilePictureIfNotExists("Gven", "https://i.postimg.cc/CMW48fRR/image.png");
+
+            // Reload the list
+            profilePictures = dbHelper.getAllProfilePictures();
         }
+
+
+        private void loadProfilePicture(String pictureId) {
+            for (ProfilePicture picture : profilePictures) {
+                if (picture.getId().equals(pictureId)) {
+                    Glide.with(this)
+                            .load(picture.getUrl())
+                            .placeholder(R.drawable.profile_default)
+                            .error(R.drawable.profile_default)
+                            .circleCrop()
+                            .into(profileImageView);
+                    return;
+                }
+            }
+            profileImageView.setImageResource(R.drawable.profile_default);
+        }
+
+        private void showPictureSelectionDialog() {
+            if (profilePictures.isEmpty()) {
+                Toast.makeText(this, "No pictures available", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            CharSequence[] items = new CharSequence[profilePictures.size()];
+            for (int i = 0; i < profilePictures.size(); i++) {
+                items[i] = profilePictures.get(i).getId(); // Can be changed to label if needed
+            }
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Ընտրել նկար")
+                    .setItems(items, (dialog, which) -> {
+                        ProfilePicture selected = profilePictures.get(which);
+
+                        if (userRef != null) {
+                            userRef.child("profilePhoto").setValue(selected.getId());
+                        }
+
+                        if (currentUser != null) {
+                            String userId = currentUser.getUid();
+                            FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                            firestore.collection("users").document(userId)
+                                    .update("profilePhotoUrl", selected.getUrl())
+                                    .addOnSuccessListener(aVoid ->
+                                            Log.d("Firestore", "Profile picture URL saved to Firestore"))
+                                    .addOnFailureListener(e ->
+                                            Log.e("Firestore", "Error saving profile picture URL", e));
+                        }
+
+                        Glide.with(ProfileActivity.this)
+                                .load(selected.getUrl())
+                                .placeholder(R.drawable.profile_default)
+                                .error(R.drawable.profile_default)
+                                .circleCrop()
+                                .into(profileImageView);
+
+                        Toast.makeText(this, "Profile picture updated", Toast.LENGTH_SHORT).show();
+                    }).show();
+
+
+        }
+
+
     }
-}

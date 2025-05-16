@@ -1,9 +1,11 @@
 package com.example.ninja;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,16 +15,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LeaderboardFragment extends Fragment {
@@ -34,6 +34,8 @@ public class LeaderboardFragment extends Fragment {
 
     private TextView firstName, secondName, thirdName;
     private TextView firstPoints, secondPoints, thirdPoints;
+    private ImageView profImage1, profImage2, profImage3;
+
 
     private FirebaseFirestore db;
     private CollectionReference usersRef;
@@ -63,8 +65,34 @@ public class LeaderboardFragment extends Fragment {
         secondPoints = view.findViewById(R.id.secondPoints);
         thirdPoints = view.findViewById(R.id.thirdPoints);
 
+        profImage1 = view.findViewById(R.id.profImage1);
+        profImage2 = view.findViewById(R.id.profImage2);
+        profImage3 = view.findViewById(R.id.profImage3);
+
+
         db = FirebaseFirestore.getInstance();
         usersRef = db.collection("users");
+
+
+        if (fullUserList.size() > 0) {
+            User first = fullUserList.get(0);
+            firstName.setText(first.getUsername());
+            firstPoints.setText(first.getScore() + " միավոր");
+            Glide.with(this).load(first.getProfilePhotoUrl()).placeholder(R.drawable.baseline_person).into(profImage1);
+        }
+        if (fullUserList.size() > 1) {
+            User second = fullUserList.get(1);
+            secondName.setText(second.getUsername());
+            secondPoints.setText(second.getScore() + " միավոր");
+            Glide.with(this).load(second.getProfilePhotoUrl()).placeholder(R.drawable.baseline_person).into(profImage2);
+        }
+        if (fullUserList.size() > 2) {
+            User third = fullUserList.get(2);
+            thirdName.setText(third.getUsername());
+            thirdPoints.setText(third.getScore() + " միավոր");
+            Glide.with(this).load(third.getProfilePhotoUrl()).placeholder(R.drawable.baseline_person).into(profImage3);
+        }
+
 
         fetchScores();
     }
@@ -86,7 +114,10 @@ public class LeaderboardFragment extends Fragment {
                                 // Use username if available, otherwise use email, otherwise use UID
                                 String displayName = username != null ? username :
                                         (email != null ? email : uid);
-                                fullUserList.add(new User(displayName, score));
+                                String photoUrl = document.getString("profilePhotoUrl");
+                                Log.d("PHOTO_URL", "Photo URL for " + displayName + ": " + photoUrl);
+
+                                fullUserList.add(new User(displayName, score, photoUrl));
                             }
                         }
 
@@ -101,18 +132,50 @@ public class LeaderboardFragment extends Fragment {
     private void displayTopThree() {
         if (fullUserList.size() > 0) {
             User first = fullUserList.get(0);
+            String photoUrl = first.getProfilePhotoUrl();
+            if (photoUrl != null && !photoUrl.isEmpty()) {
+                Glide.with(this)
+                        .load(photoUrl)
+                        .placeholder(R.drawable.baseline_person)
+                        .transform(new CircleCrop())
+                        .into(profImage1);
+            } else {
+                profImage1.setImageResource(R.drawable.baseline_person);
+            }
             firstName.setText(first.getUsername());
-            firstPoints.setText(first.getScore() + " points");
+            firstPoints.setText(first.getScore() + " միավոր");
         }
+
         if (fullUserList.size() > 1) {
             User second = fullUserList.get(1);
+            String photoUrl = second.getProfilePhotoUrl();
+            if (photoUrl != null && !photoUrl.isEmpty()) {
+                Glide.with(this)
+                        .load(photoUrl)
+                        .placeholder(R.drawable.baseline_person)
+                        .transform(new CircleCrop())
+                        .into(profImage2);  // Fixed: was profImage1
+            } else {
+                profImage2.setImageResource(R.drawable.baseline_person);
+            }
             secondName.setText(second.getUsername());
-            secondPoints.setText(second.getScore() + " points");
+            secondPoints.setText(second.getScore() + " միավոր");
         }
+
         if (fullUserList.size() > 2) {
             User third = fullUserList.get(2);
+            String photoUrl = third.getProfilePhotoUrl();
+            if (photoUrl != null && !photoUrl.isEmpty()) {
+                Glide.with(this)
+                        .load(photoUrl)
+                        .placeholder(R.drawable.baseline_person)
+                        .transform(new CircleCrop())
+                        .into(profImage3);  // Fixed: was profImage1
+            } else {
+                profImage3.setImageResource(R.drawable.baseline_person);
+            }
             thirdName.setText(third.getUsername());
-            thirdPoints.setText(third.getScore() + " points");
+            thirdPoints.setText(third.getScore() + " միավոր");
         }
     }
 

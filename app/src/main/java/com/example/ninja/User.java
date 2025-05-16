@@ -3,10 +3,19 @@ package com.example.ninja;
 public class User {
     private String username;
     private long score;
+    private String profilePhotoUrl;
 
-    public User(String username, long score) {
+    // Constructor
+    public User(String username, long score, String profilePhotoUrl) {
         this.username = username;
         this.score = score;
+        this.profilePhotoUrl = (profilePhotoUrl != null && !profilePhotoUrl.isEmpty()) ?
+                profilePhotoUrl : null;
+    }
+
+    // Getter
+    public String getProfilePhotoUrl() {
+        return profilePhotoUrl;
     }
 
     public String getUsername() {

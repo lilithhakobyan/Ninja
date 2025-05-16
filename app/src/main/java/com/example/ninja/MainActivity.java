@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button karginButton,karginSerialButton, vitaminButton;
+    private Button karginButton, vitaminButton;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private TextView usernameTextView;
@@ -124,6 +124,4 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
-
-
 }

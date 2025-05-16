@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +32,8 @@ public class DiscoverFragment extends Fragment {
     private FirebaseFirestore db;
 
     private TextView usernameTextView;
+    private ImageView profileImageView; // Add this field
+
 
 
     Button gol, kartoshka,dzmeruk,tupoy,bordo;
@@ -73,6 +77,7 @@ public class DiscoverFragment extends Fragment {
         bordo = view.findViewById(R.id.yt_bordo);
 
         usernameTextView = view.findViewById(R.id.username);
+        profileImageView = view.findViewById(R.id.profile_picture); 
 
 
         gol.setOnClickListener(new View.OnClickListener() {
@@ -121,12 +126,42 @@ public class DiscoverFragment extends Fragment {
         });
 
         loadUserData();
+        loadProfilePicture();
 
 
         return view;
 
     }
 
+    private void loadProfilePicture() {
+        if (!isAdded() || getActivity() == null) {
+            return; // Don't load if fragment isn't attached
+        }
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            db.collection("users").document(user.getUid())
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (isAdded() && getActivity() != null && documentSnapshot.exists()) {
+                            String profilePhotoUrl = documentSnapshot.getString("profilePhotoUrl");
+                            if (profilePhotoUrl != null && !profilePhotoUrl.isEmpty()) {
+                                Glide.with(requireActivity()) // Use requireActivity()
+                                        .load(profilePhotoUrl)
+                                        .circleCrop()
+                                        .placeholder(R.drawable.baseline_person_24)
+                                        .error(R.drawable.baseline_person_24)
+                                        .into(profileImageView);
+                            }
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        if (isAdded()) {
+                            Log.e("DiscoverFragment", "Failed to load profile picture", e);
+                        }
+                    });
+        }
+    }
     private void loadUserData() {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
@@ -142,6 +177,11 @@ public class DiscoverFragment extends Fragment {
         }
     }
 
-
+    // Optional: Refresh when fragment becomes visible again
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadProfilePicture();
+    }
 
 }

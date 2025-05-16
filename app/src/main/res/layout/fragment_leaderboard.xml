@@ -10,8 +10,9 @@
         android:id="@+id/leaderboardTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Leaderboard"
+        android:text="Առաջատարների աղյուսակ"
         android:textSize="24sp"
+        android:layout_marginTop="25dp"
         android:textStyle="bold"
         android:textColor="#0D0D0D"
         android:layout_gravity="center_horizontal" />
@@ -37,6 +38,7 @@
             android:padding="8dp">
 
             <ImageView
+                android:id="@+id/profImage2"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/baseline_person"
@@ -73,6 +75,7 @@
             android:padding="8dp">
 
             <ImageView
+                android:id="@+id/profImage1"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:src="@drawable/baseline_person"
@@ -109,6 +112,7 @@
             android:padding="8dp">
 
             <ImageView
+                android:id="@+id/profImage3"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/baseline_person"
