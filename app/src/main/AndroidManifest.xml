@@ -24,6 +24,9 @@
             android:name=".VitaminQuizActivity"
             android:exported="false" />
         <activity
+            android:name=".KarginSerialActivity"
+            android:exported="false" />
+        <activity
             android:name=".ScorePage"
             android:exported="false" />
         <activity

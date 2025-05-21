@@ -32,7 +32,7 @@ import java.util.Set;
 public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "QuizActivity";
-    private static final int MAX_QUESTIONS = 6;
+    private static final int MAX_QUESTIONS = 7;
 
     private TextView quizTitle, questionText;
     private Button ans1, ans2, ans3, nextQuestion;
@@ -208,25 +208,63 @@ public class QuizActivity extends AppCompatActivity {
                 "video"
         );
 
+        dbHelper.addQuizQuestion(
+                "Haghordum Quiz",
+                "https://i.postimg.cc/d359F6mp/Screenshot-2025-05-20-125547.png",
+                "Ո՞ր արտահայտությունն է պատկանում տվյալ հերոսին",
+                "Ընդե մի տեսակ հաճելի լաուրա կա",
+                "Արա պադվատիտ չանես, այ լակոտ",
+                "Ես ձեր անասուն ցավը տանեմ",
+                "Ես ձեր անասուն ցավը տանեմ",
+                "image"
+        );
+
+        dbHelper.addQuizQuestion(
+                "Haghordum Quiz",
+                "https://youtu.be/Wo6ttiBi5mg",
+                "Դիտիր տեսանյութը և կռահիր՝ ինչ է ասում հերոսը հետո",
+                "Ես ինչ իմանամ",
+                "Էն վախտ փող պետք չէր",
+                "Հերս ասում էր, չէի լսում",
+                "Էն վախտ փող պետք չէր",
+                "video"
+        );
+
+        dbHelper.addQuizQuestion(
+                "Haghordum Quiz",
+                "https://i.postimg.cc/m27JHzNn/Screenshot-2025-05-20-120720.png",
+                "Ո՞ր արտահայտությունն է պատկանում տվյալ հերոսին",
+                "Տիկին, դուք սխալվել եք",
+                "Հլը նորից կրկնի",
+                "Ասում եմ չէ,նովու",
+                "Տիկին, դուք սխալվել եք",
+                "image"
+        );
+
+
     }
 
     private List<QuizQuestion> getUniqueVideoQuestions(List<QuizQuestion> quizList, int maxQuestions) {
         List<QuizQuestion> uniqueQuestions = new ArrayList<>();
-        Set<String> videoUrls = new HashSet<>();
+        Set<String> mediaUrls = new HashSet<>();
 
-        // Shuffle to get random questions
+        Collections.shuffle(quizList);
+
         Collections.shuffle(quizList);
 
         for (QuizQuestion question : quizList) {
-            String videoUrl = question.getMediaUrl();
-            if (!videoUrls.contains(videoUrl)) {
-                videoUrls.add(videoUrl);
+            String mediaUrl = question.getMediaUrl();
+            if (!mediaUrls.contains(mediaUrl)) {
+                mediaUrls.add(mediaUrl);
                 uniqueQuestions.add(question);
                 if (uniqueQuestions.size() >= maxQuestions) break;
             }
         }
         return uniqueQuestions;
     }
+
+
+
 
     private void checkAnswer(String selectedAnswer) {
         QuizQuestion currentQuestion = selectedQuestions.get(currentIndex);
@@ -272,20 +310,14 @@ public class QuizActivity extends AppCompatActivity {
     private void loadQuestion(int index) {
         QuizQuestion currentQuestion = selectedQuestions.get(index);
 
-        // Update UI elements
-        quizTitle.setText("Question " + (index + 1) + " of " + MAX_QUESTIONS);
+        quizTitle.setText("Հարց  " + (index + 1));
         questionText.setText(currentQuestion.getQuestion());
         ans1.setText(currentQuestion.getOption1());
         ans2.setText(currentQuestion.getOption2());
         ans3.setText(currentQuestion.getOption3());
 
-        // Reset button states
         resetAnswerButtons();
-
-        // Load YouTube video
-        loadYouTubeVideo(currentQuestion.getMediaUrl());
-
-        // Update progress
+        loadMedia(currentQuestion.getMediaUrl(), currentQuestion.getMediaType());
         updateProgress(index);
     }
 
@@ -302,20 +334,34 @@ public class QuizActivity extends AppCompatActivity {
         nextQuestion.setEnabled(false);
     }
 
-    private void loadYouTubeVideo(String videoUrl) {
-        String videoId = extractYouTubeVideoId(videoUrl);
-        if (videoId != null) {
-            String videoHtml = "<html>" +
-                    "<body style='margin:0;padding:0;'>" +
-                    "<iframe width='100%' height='100%' " +
-                    "src='https://www.youtube.com/embed/" + videoId +
-                    "?autoplay=1&rel=0&controls=1&modestbranding=1' " +
-                    "frameborder='0' allowfullscreen></iframe>" +
-                    "</body></html>";
+    private void loadMedia(String mediaUrl, String mediaType) {
+        if (mediaUrl == null || mediaUrl.isEmpty()) {
+            webView.setVisibility(View.GONE);
+            return;
+        }
 
-            webView.loadData(videoHtml, "text/html", "utf-8");
+        webView.setVisibility(View.VISIBLE);
+
+        if (mediaType.equals("video")) {
+            String videoId = extractYouTubeVideoId(mediaUrl);
+            if (videoId != null) {
+                String videoHtml = "<html><body style='margin:0;padding:0;'>" +
+                        "<iframe width='100%' height='100%' " +
+                        "src='https://www.youtube.com/embed/" + videoId +
+                        "?autoplay=1&rel=0&controls=1&modestbranding=1' " +
+                        "frameborder='0' allowfullscreen></iframe></body></html>";
+                webView.loadData(videoHtml, "text/html", "utf-8");
+            } else {
+                Log.w(TAG, "Invalid YouTube URL: " + mediaUrl);
+                webView.setVisibility(View.GONE);
+            }
+        } else if (mediaType.equals("image")) {
+            String imageHtml = "<html><body style='margin:0;padding:0;'>" +
+                    "<img src='" + mediaUrl + "' style='width:100%;height:100%;object-fit:contain;'/>" +
+                    "</body></html>";
+            webView.loadData(imageHtml, "text/html", "utf-8");
         } else {
-            Log.w(TAG, "Invalid YouTube URL: " + videoUrl);
+            webView.setVisibility(View.GONE);
         }
     }
 
@@ -324,16 +370,16 @@ public class QuizActivity extends AppCompatActivity {
         progressBar.setProgress(progress);
     }
 
-    private String extractYouTubeVideoId(String videoUrl) {
-        if (videoUrl == null) return null;
+    private String extractYouTubeVideoId(String url) {
+        if (url == null) return null;
 
         try {
-            if (videoUrl.contains("youtu.be/")) {
-                return videoUrl.substring(videoUrl.lastIndexOf("/") + 1).split("\\?")[0];
-            } else if (videoUrl.contains("watch?v=")) {
-                return videoUrl.substring(videoUrl.indexOf("v=") + 2).split("&")[0];
-            } else if (videoUrl.contains("youtube.com/embed/")) {
-                return videoUrl.substring(videoUrl.lastIndexOf("/") + 1).split("\\?")[0];
+            if (url.contains("youtu.be/")) {
+                return url.substring(url.lastIndexOf("/") + 1).split("\\?")[0];
+            } else if (url.contains("watch?v=")) {
+                return url.substring(url.indexOf("v=") + 2).split("&")[0];
+            } else if (url.contains("youtube.com/embed/")) {
+                return url.substring(url.lastIndexOf("/") + 1).split("\\?")[0];
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to extract video ID", e);

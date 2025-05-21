@@ -37,7 +37,7 @@ public class DiscoverFragment extends Fragment {
 
 
 
-    Button gol, kartoshka,dzmeruk,tupoy,bordo,AzatGoti,AnkochHyur,Bodybuilder,KisabacDebatner,Nkarich,Oligarkh,AramMP3, Avtovtar;
+    Button gol, kartoshka,dzmeruk,tupoy,bordo,Akanj, Trener, Tikin, AzatGoti,AnkochHyur,Bodybuilder,KisabacDebatner,Nkarich,Oligarkh,AramMP3, Avtovtar;
 
     public DiscoverFragment() {
         // Required empty public constructor
@@ -85,6 +85,9 @@ public class DiscoverFragment extends Fragment {
         Oligarkh = view.findViewById(R.id.yt_oligarkh);
         AramMP3 = view.findViewById(R.id.yt_arammp3);
         Avtovtar = view.findViewById(R.id.yt_avtovtar);
+        Akanj = view.findViewById(R.id.yt_sketch);
+        Trener = view.findViewById(R.id.yt_trener);
+        Tikin = view.findViewById(R.id.yt_tikin);
 
         usernameTextView = view.findViewById(R.id.username);
         profileImageView = view.findViewById(R.id.profile_picture); 
@@ -130,6 +133,33 @@ public class DiscoverFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String youtubeUrl = "https://youtu.be/SWF0HecSwYA?si=BYm8Mh3XwOBO0IHL";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        Akanj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=xFKrPTRGLjU";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        Trener.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=ZVSYU_ez_dY";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
+                startActivity(intent);
+            }
+        });
+
+        Tikin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String youtubeUrl = "https://www.youtube.com/watch?v=kxQdokoQXTA";
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(youtubeUrl));
                 startActivity(intent);
             }

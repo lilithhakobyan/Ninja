@@ -208,6 +208,96 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/sketch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_edittext"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/sk_f"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:src="@drawable/sketch599" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_toEndOf="@id/sk_f"
+                android:paddingStart="15dp"
+                android:gravity="center"
+                android:text="Սկետչ 599" />
+
+            <Button
+                android:id="@+id/yt_sketch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Նայել" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/trener"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_edittext"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/trener_img"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:src="@drawable/anasun" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_toEndOf="@id/trener_img"
+                android:paddingStart="15dp"
+                android:gravity="center"
+                android:text="Տրենեռ" />
+
+            <Button
+                android:id="@+id/yt_trener"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Նայել" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tikin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_edittext"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/tikin_img"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:src="@drawable/tikin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_toEndOf="@id/tikin_img"
+                android:paddingStart="15dp"
+                android:gravity="center"
+                android:text="Սկետչ 662" />
+
+            <Button
+                android:id="@+id/yt_tikin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Նայել" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/azat_goti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -470,6 +560,8 @@
                 android:layout_alignParentEnd="true"
                 android:text="@string/watch" />
         </RelativeLayout>
+
+
 
     </LinearLayout>
 </ScrollView>
