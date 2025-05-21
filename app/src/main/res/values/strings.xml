@@ -46,8 +46,6 @@
     <!--    settings page-->
     <string name="edit_profile">Խմբագրել</string>
     <string name="language">Լեզու</string>
-    <string name="terms_policies">Պայմաններ և կանոններ</string>
-    <string name="feedback">Կապ մեզ հետ</string>
     <string name="logout">Դուրս գալ</string>
 
     <!--    nav bar-->
@@ -65,12 +63,17 @@
 
 
     <!--    edit profile-->
-
     <string name="change_picture">Change Picture</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="english">English</string>
     <string name="armenian">Armenian</string>
     <string name="select_language">Select Language</string>
     <string name="choose_profile_picture">Choose Profile Picture</string>
-</resources>
 
+
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Armenian</item>
+    </string-array>
+
+</resources>

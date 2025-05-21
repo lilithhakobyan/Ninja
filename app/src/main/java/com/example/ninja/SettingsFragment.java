@@ -3,6 +3,7 @@ package com.example.ninja;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,74 +11,101 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Locale;
+
 public class SettingsFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
+    private Spinner languageSpinner;
     private TextView edit_profile;
+    private SharedPreferences prefs;
 
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
-
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private boolean languageChanged = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        // Set up the log out button
-        TextView logOutTextView = rootView.findViewById(R.id.logOutTextView);
-        logOutTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
-                sharedPreferences.edit().clear().apply();
+        prefs = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
 
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
+        // Set app locale based on saved preference (if not already set)
+        String savedLang = prefs.getString("lang", "hy"); // Armenian default
+        setAppLocale(savedLang); // ensures UI is updated correctly
 
+        languageSpinner = rootView.findViewById(R.id.languageSpinner);
         edit_profile = rootView.findViewById(R.id.edit_profile);
-        edit_profile.setOnClickListener(new View.OnClickListener() {
+        TextView logOutTextView = rootView.findViewById(R.id.logOutTextView);
+
+        // Setup language spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.language_options,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        languageSpinner.setAdapter(adapter);
+
+        // Set spinner to match saved language
+        if (savedLang.equals("en")) {
+            languageSpinner.setSelection(1);
+        } else {
+            languageSpinner.setSelection(0);
+        }
+
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            boolean firstLoad = true;
+
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                startActivity(intent);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (firstLoad) {
+                    firstLoad = false;
+                    return;
+                }
+
+                String selectedLang = (position == 0) ? "hy" : "en";
+
+                if (!selectedLang.equals(savedLang)) {
+                    prefs.edit()
+                            .putString("lang", selectedLang)
+                            .putBoolean("reload_settings", true)
+                            .apply();
+                    requireActivity().recreate(); // recreate activity to apply language
+                }
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+        edit_profile.setOnClickListener(v -> {
+            startActivity(new Intent(requireActivity(), ProfileActivity.class));
+        });
 
+        logOutTextView.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            prefs.edit().clear().apply();
+            startActivity(new Intent(requireActivity(), LoginActivity.class));
+            requireActivity().finish();
+        });
 
         return rootView;
+    }
+
+    private void setAppLocale(String langCode) {
+        Locale locale = new Locale(langCode);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.setLocale(locale);
+        requireActivity().getResources().updateConfiguration(
+                config,
+                requireActivity().getResources().getDisplayMetrics()
+        );
     }
 }

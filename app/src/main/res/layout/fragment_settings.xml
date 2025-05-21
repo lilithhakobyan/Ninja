@@ -50,7 +50,7 @@
                     android:textColor="@android:color/black" />
             </LinearLayout>
 
-            <!-- Language -->
+            <!-- Language with Dropdown -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,62 +64,18 @@
                     android:layout_height="24dp"
                     android:src="@drawable/baseline_language_24"/>
 
-                <TextView
-                    android:layout_width="0dp"
+                <Spinner
+                    android:id="@+id/languageSpinner"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="@string/language"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:textColor="@android:color/black" />
+                    android:spinnerMode="dropdown"
+                    android:backgroundTint="@android:color/black" />
+
             </LinearLayout>
 
-            <!-- Terms and Policies -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/baseline_shield_24"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/terms_policies"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/baseline_feedback_24" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/feedback"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    android:textColor="@android:color/black" />
-            </LinearLayout>
 
 
             <LinearLayout

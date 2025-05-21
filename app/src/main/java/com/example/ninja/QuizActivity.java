@@ -207,6 +207,7 @@ public class QuizActivity extends AppCompatActivity {
                 "Ապեր ստեղ պահի,աչքիս սխալ մարշուտկա եմ նստել",
                 "video"
         );
+
     }
 
     private List<QuizQuestion> getUniqueVideoQuestions(List<QuizQuestion> quizList, int maxQuestions) {
