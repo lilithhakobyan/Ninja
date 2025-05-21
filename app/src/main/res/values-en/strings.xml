@@ -78,6 +78,7 @@
 
 <!--    Discover-->
     <string name="watch">Watch</string>
+    <string name="choose_photo">Choose photo</string>
 
     <string-array name="language_options">
         <item>Armenian</item>

@@ -78,6 +78,7 @@
 
     <!--    Discover-->
     <string name="watch">նայել</string>
+    <string name="choose_photo">Ընտրել նկար</string>
 
 
     <string-array name="language_options">

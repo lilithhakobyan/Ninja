@@ -42,6 +42,7 @@
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
+            LocaleHelper.applySavedLocale(this);
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_profile);
 
@@ -165,7 +166,7 @@
             }
 
             new AlertDialog.Builder(this)
-                    .setTitle("Ընտրել նկար")
+                    .setTitle(R.string.choose_photo)
                     .setItems(items, (dialog, which) -> {
                         ProfilePicture selected = profilePictures.get(which);
 
