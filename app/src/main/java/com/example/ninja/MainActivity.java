@@ -1,9 +1,12 @@
 package com.example.ninja;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint({"ResourceType", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleHelper.applySavedLocale(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -100,6 +105,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(newBase);
+        String lang = prefs.getString("app_language", "hy");
+        super.attachBaseContext(LanguageHelper.setLocale(newBase, lang));
+    }
+
+
+
+    private Context updateLocale(Context context, String langCode) {
+        Locale locale = new Locale(langCode);
+        Locale.setDefault(locale);
+        Configuration config = context.getResources().getConfiguration();
+        config.setLocale(locale);
+        return context.createConfigurationContext(config);
+    }
+
     private void loadProfilePicture(ImageView profileImageView) {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {

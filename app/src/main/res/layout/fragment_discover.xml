@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -114,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -144,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -174,7 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -204,7 +204,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -234,7 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -268,7 +268,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -302,7 +302,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -336,7 +336,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -369,7 +369,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -402,7 +402,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -435,7 +435,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -468,7 +468,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Նայել" />
+                android:text="@string/watch" />
         </RelativeLayout>
 
     </LinearLayout>

@@ -10,7 +10,7 @@
         android:id="@+id/leaderboardTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Առաջատարների աղյուսակ"
+        android:text="@string/leaderboard_title"
         android:textSize="24sp"
         android:layout_marginTop="25dp"
         android:textStyle="bold"

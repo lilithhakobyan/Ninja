@@ -70,10 +70,22 @@
     <string name="select_language">Select Language</string>
     <string name="choose_profile_picture">Choose Profile Picture</string>
 
+<!--    leaderboard-->
+    <string name="leaderboard_title">Առաջատարների աղյուսակ</string>
+    <string name="score">%1$d միավոր</string>
+    <string name="score_progress">Իմ պրոգրեսը</string>
+    <string name="answered_right">Ճիշտ </string>
+    <string name="answered_wrong">Սխալ</string>
+    <string name="total">Ընդհանուր</string>
+
+    <!--    Discover-->
+    <string name="watch">նայել</string>
+
 
     <string-array name="language_options">
-        <item>English</item>
         <item>Armenian</item>
+        <item>English</item>
     </string-array>
+
 
 </resources>

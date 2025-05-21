@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">Ninja</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register_now_text"><![CDATA[Don\'t have an account?Register Now]]></string>
+    <string name="login_now_text">Already have an account? Login Now</string>
+    <string name="remember_pass_text">Remember password? Login Now</string>
+    <string name="screen1">Welcome to Ninja!</string>
+    <string name="screen2">Lets see if you can answer</string>
+    <string name="screen1desc">Play with friends, answer questions, and climb the leaderboard!</string>
+    <string name="screen2desc">Armenian humor, legendary scenes, and memes all in one place!</string>
+    <string name="startDesc">Create a long video or shorts and upload on YouTube. Interact with your subscribers on YouTube Live.</string>
+    <string name="default_web_client_id">530152070036-iqcni1knrtf917t9pj34b9fsapq6h172.apps.googleusercontent.com</string>
+    <string name="if_open_email" />
+
+    <!-- new pass page -->
+    <string name="create_new_pass_text">Create a New Password</string>
+    <string name="caption_createpass">The new password must be different from previous ones</string>
+    <string name="new_pass">New Password</string>
+    <string name="confrim_new_pass">Confirm Password</string>
+    <string name="reset_pass">Reset</string>
+
+    <!-- forgot pass page -->
+    <string name="forgot_title">Forgot your password?</string>
+    <string name="forgot_caption">Don’t worry! Please enter your email address</string>
+    <string name="email">Email</string>
+    <string name="send">Send</string>
+
+    <!-- login page -->
+    <string name="login_title">Welcome! We’re glad to see you</string>
+    <string name="password">Password</string>
+    <string name="forgot_pass">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="or_login_with">or</string>
+
+    <!-- home page -->
+    <string name="username">Username</string>
+    <string name="home_title">Quizzes</string>
+    <string name="kargin_mainpage">Kargin</string>
+    <string name="vitamin_mainpage">Vitamin</string>
+    <string name="choose_quiz">Choose</string>
+
+    <!-- register page -->
+    <string name="register">Register</string>
+    <string name="register_title">Register to get started</string>
+
+    <!-- settings page -->
+    <string name="edit_profile">Edit</string>
+    <string name="language">Language</string>
+    <string name="logout">Log out</string>
+
+    <!-- nav bar -->
+    <string name="home">Home</string>
+    <string name="discover">Discover</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="settings">Settings</string>
+
+    <!-- kargin fragment -->
+    <string name="kargin_fragment_title">Kargin</string>
+    <string name="multer">Kargin Cartoons</string>
+    <string name="serial">Kargin Series</string>
+    <string name="haxordum">Kargin Show</string>
+    <string name="start_quiz">Start</string>
+
+    <!-- edit profile -->
+    <string name="change_picture">Change Picture</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="english">English</string>
+    <string name="armenian">Armenian</string>
+    <string name="select_language">Select Language</string>
+    <string name="choose_profile_picture">Choose Profile Picture</string>
+
+
+    <!--    leaderboard-->
+    <string name="leaderboard_title">Leaderboard</string>
+    <string name="score">%1$d points</string>
+    <string name="score_progress">My progress</string>
+    <string name="answered_right">Right</string>
+    <string name="answered_wrong">Wrong</string>
+    <string name="total">Total</string>
+
+<!--    Discover-->
+    <string name="watch">Watch</string>
+
+    <string-array name="language_options">
+        <item>Armenian</item>
+        <item>English</item>
+    </string-array>
+</resources>

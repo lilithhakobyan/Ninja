@@ -148,7 +148,10 @@ public class LeaderboardFragment extends Fragment {
                 profImage1.setImageResource(R.drawable.baseline_person);
             }
             firstName.setText(first.getUsername());
-            firstPoints.setText(first.getScore() + " միավոր");
+            firstPoints.setText(
+                    secondPoints.getContext().getString(R.string.score, first.getScore())
+            );
+
         }
 
         if (fullUserList.size() > 1) {
@@ -164,7 +167,9 @@ public class LeaderboardFragment extends Fragment {
                 profImage2.setImageResource(R.drawable.baseline_person);
             }
             secondName.setText(second.getUsername());
-            secondPoints.setText(second.getScore() + " միավոր");
+            secondPoints.setText(
+                    secondPoints.getContext().getString(R.string.score, second.getScore())
+            );
         }
 
         if (fullUserList.size() > 2) {
@@ -180,7 +185,9 @@ public class LeaderboardFragment extends Fragment {
                 profImage3.setImageResource(R.drawable.baseline_person);
             }
             thirdName.setText(third.getUsername());
-            thirdPoints.setText(third.getScore() + " միավոր");
+            thirdPoints.setText(
+                    thirdPoints.getContext().getString(R.string.score, third.getScore())
+            );
         }
     }
 

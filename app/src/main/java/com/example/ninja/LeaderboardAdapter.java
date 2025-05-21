@@ -1,5 +1,6 @@
 package com.example.ninja;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,10 +117,13 @@ import java.util.List;
 
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHolder> {
 
+    private Context context;
     private List<User> userList;
 
     public LeaderboardAdapter(List<User> userList) {
         this.userList = userList;
+        this.context = context;
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -147,7 +151,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         User user = userList.get(position);
         holder.rankText.setText(String.valueOf(position + 4));
         holder.nameText.setText(user.getUsername());
-        holder.scoreText.setText(user.getScore() + " միավոր");
+        holder.scoreText.setText(
+                holder.scoreText.getContext().getString(R.string.score, user.getScore())
+        );
 
         String photoUrl = user.getProfilePhotoUrl();
         if (photoUrl != null && !photoUrl.isEmpty()) {

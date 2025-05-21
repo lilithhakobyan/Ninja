@@ -35,15 +35,14 @@ public class SettingsFragment extends Fragment {
 
         prefs = requireActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
 
-        // Set app locale based on saved preference (if not already set)
         String savedLang = prefs.getString("lang", "hy"); // Armenian default
-        setAppLocale(savedLang); // ensures UI is updated correctly
+
+        setAppLocale(savedLang);
 
         languageSpinner = rootView.findViewById(R.id.languageSpinner);
         edit_profile = rootView.findViewById(R.id.edit_profile);
         TextView logOutTextView = rootView.findViewById(R.id.logOutTextView);
 
-        // Setup language spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 requireContext(),
                 R.array.language_options,
@@ -52,12 +51,14 @@ public class SettingsFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(adapter);
 
-        // Set spinner to match saved language
-        if (savedLang.equals("en")) {
-            languageSpinner.setSelection(1);
-        } else {
-            languageSpinner.setSelection(0);
-        }
+        languageSpinner.post(() -> {
+            if (savedLang.equals("en")) {
+                languageSpinner.setSelection(1, false);
+            } else {
+                languageSpinner.setSelection(0, false);
+            }
+        });
+
 
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             boolean firstLoad = true;
@@ -74,9 +75,8 @@ public class SettingsFragment extends Fragment {
                 if (!selectedLang.equals(savedLang)) {
                     prefs.edit()
                             .putString("lang", selectedLang)
-                            .putBoolean("reload_settings", true)
                             .apply();
-                    requireActivity().recreate(); // recreate activity to apply language
+                    requireActivity().recreate();
                 }
             }
 
@@ -96,16 +96,17 @@ public class SettingsFragment extends Fragment {
         });
 
         return rootView;
+
     }
 
-    private void setAppLocale(String langCode) {
-        Locale locale = new Locale(langCode);
+    private void setAppLocale(String language) {
+        Locale locale = new Locale(language);
         Locale.setDefault(locale);
+
         Configuration config = new Configuration();
         config.setLocale(locale);
-        requireActivity().getResources().updateConfiguration(
-                config,
-                requireActivity().getResources().getDisplayMetrics()
-        );
+        requireActivity().getResources().updateConfiguration(config, requireActivity().getResources().getDisplayMetrics());
     }
+
+
 }

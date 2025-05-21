@@ -186,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#3F51B5"
-                android:text="@string/choose_quiz"
+                android:text="@string/start_quiz"
                 android:layout_marginEnd="5dp"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -45,17 +45,17 @@ public class ScorePage extends AppCompatActivity {
         int roundedProgress = Math.round(percentage);
 
         // Update completion text
-        completion.setText("Իմ պրոգրեսը " + " " + roundedProgress + "%");
+        completion.setText(getString(R.string.score_progress) + " " + roundedProgress + "%");
 
         // If score is equal to total questions, set progress to 100%
         if (score == totalQuestions) {
-            completion.setText("Իմ պրոգրեսը 100%");
+            completion.setText(getString(R.string.score_progress) + "100%");
         }
 
         // Set other text values
-        correct.setText("Ճիշտ " + " " + score);
-        wrong.setText("Սխալ " + " " + wrongAnswers);
-        total_questions.setText("Ընդհանուր " + " " + totalQuestions);
+        correct.setText(getString(R.string.answered_right) + " " + score);
+        wrong.setText(getString(R.string.answered_wrong) + " " + wrongAnswers);
+        total_questions.setText(getString(R.string.total)  + " " + totalQuestions);
 
         // Animate progress
         animateProgress(roundedProgress);

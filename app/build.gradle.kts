@@ -26,27 +26,32 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
-dependencies {
-    implementation(libs.firebase.auth)  // Firebase Authentication
-    implementation(libs.play.services.auth) // Google Sign-In SDK
 
+dependencies {
+    // Firebase & Google Sign-In
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.database)
+    implementation(libs.play.services.auth)
+
+    // Android UI & Core libraries
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.firebase.firestore)
-    implementation(libs.firebase.database)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-
+    // Glide for image loading
     implementation(libs.glide)
     annotationProcessor(libs.glide.compiler)
 
+    // Testing
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5") 
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
