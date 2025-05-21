@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:text="Խմբագրել"
+        android:text="@string/edit_photo"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="#222222" />
@@ -54,7 +54,7 @@
         android:layout_below="@id/profileImageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:text="փոխել նկարը"
+        android:text="@string/change_picture"
         android:textColor="@color/blue"
         android:textSize="14sp"
         android:textStyle="bold" />
@@ -67,7 +67,7 @@
         android:layout_below="@id/btnChangePicture"
         android:layout_marginTop="40dp"
         android:layout_marginStart="12dp"
-        android:text="Օգտանուն"
+        android:text="@string/username"
         android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="#444444" />
@@ -93,7 +93,7 @@
         android:layout_below="@id/tvUsername"
         android:layout_marginTop="20dp"
         android:layout_marginStart="12dp"
-        android:text="Էլ․ հասցե"
+        android:text="@string/email"
         android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="#444444" />

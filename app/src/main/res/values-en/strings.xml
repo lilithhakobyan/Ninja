@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Ninja</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="register_now_text"><![CDATA[Don\'t have an account?Register Now]]></string>
     <string name="login_now_text">Already have an account? Login Now</string>
     <string name="remember_pass_text">Remember password? Login Now</string>
@@ -8,7 +7,6 @@
     <string name="screen2">Lets see if you can answer</string>
     <string name="screen1desc">Play with friends, answer questions, and climb the leaderboard!</string>
     <string name="screen2desc">Armenian humor, legendary scenes, and memes all in one place!</string>
-    <string name="startDesc">Create a long video or shorts and upload on YouTube. Interact with your subscribers on YouTube Live.</string>
     <string name="default_web_client_id">530152070036-iqcni1knrtf917t9pj34b9fsapq6h172.apps.googleusercontent.com</string>
     <string name="if_open_email" />
 
@@ -66,8 +64,8 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="english">English</string>
     <string name="armenian">Armenian</string>
-    <string name="select_language">Select Language</string>
-    <string name="choose_profile_picture">Choose Profile Picture</string>
+    <string name="edit_photo">Edit photo</string>
+
 
 
     <!--    leaderboard-->

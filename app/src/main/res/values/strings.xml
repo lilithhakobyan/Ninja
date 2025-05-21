@@ -61,12 +61,12 @@
 
 
     <!--    edit profile-->
-    <string name="change_picture">Change Picture</string>
+    <string name="change_picture">Փոխել նկարը</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="english">English</string>
-    <string name="armenian">Armenian</string>
-    <string name="select_language">Select Language</string>
-    <string name="choose_profile_picture">Choose Profile Picture</string>
+    <string name="armenian">Հայերեն</string>
+    <string name="edit_photo">Խմբագրել</string>
+
 
 <!--    leaderboard-->
     <string name="leaderboard_title">Առաջատարների աղյուսակ</string>

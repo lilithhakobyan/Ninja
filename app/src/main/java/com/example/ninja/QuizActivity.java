@@ -391,26 +391,52 @@ public class QuizActivity extends AppCompatActivity {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             String userId = currentUser.getUid();
-            String username = currentUser.getDisplayName();
-            String email = currentUser.getEmail();
 
-            // Create a map with the data to update
-            Map<String, Object> userData = new HashMap<>();
-            userData.put("score", score);
+            // First get the current score from Firestore
+            firestore.collection("users").document(userId)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            long currentTotalScore = documentSnapshot.contains("score") ?
+                                    documentSnapshot.getLong("score") : 0;
 
-            // Only update username if it's not already set
-            if (username != null && !username.isEmpty()) {
-                userData.put("username", username);
-            }
-            if (email != null && !email.isEmpty()) {
-                userData.put("email", email);
-            }
+                            long newTotalScore = currentTotalScore + score;
 
-            firestore.collection("users")
-                    .document(userId)
-                    .set(userData, SetOptions.merge())
-                    .addOnSuccessListener(aVoid -> Log.d(TAG, "Score updated successfully"))
-                    .addOnFailureListener(e -> Log.w(TAG, "Error updating score", e));
+                            Map<String, Object> updates = new HashMap<>();
+                            updates.put("score", newTotalScore);
+
+                            firestore.collection("users").document(userId)
+                                    .update(updates)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Log.d(TAG, "Score updated successfully");
+                                        navigateToScorePage();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.w(TAG, "Error updating score", e);
+                                        navigateToScorePage();
+                                    });
+                        } else {
+                            Map<String, Object> userData = new HashMap<>();
+                            userData.put("score", score);
+
+                            firestore.collection("users").document(userId)
+                                    .set(userData)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Log.d(TAG, "Score created successfully");
+                                        navigateToScorePage();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Log.w(TAG, "Error creating score", e);
+                                        navigateToScorePage();
+                                    });
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.w(TAG, "Error getting current score", e);
+                        navigateToScorePage(); // Still navigate even if get fails
+                    });
+        } else {
+            navigateToScorePage();
         }
     }
 
